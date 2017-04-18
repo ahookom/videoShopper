@@ -58,9 +58,11 @@ module.exports = db => db.define('users', {
   }
 })
 
-module.exports.associations = (User, {OAuth, Thing, Favorite}) => {
+module.exports.associations = (User, {OAuth, Order, Favorite}) => {
   User.hasOne(OAuth)
-  User.belongsToMany(Thing, {as: 'favorites', through: Favorite})
+  //AH: not sure what the line below might do like add methods for searching that we want but it
+  //doesn't obviously work right now.
+  // User.belongsToMany(Order, {through: 'Purchases', foreignKey: 'purchaser'})
 }
 
 function setEmailAndPassword(user) {
