@@ -2,7 +2,7 @@
 
 // bcrypt docs: https://www.npmjs.com/package/bcrypt
 const bcrypt = require('bcryptjs')
-    , {STRING, VIRTUAL} = require('sequelize')
+    , {STRING, VIRTUAL, ENUM} = require('sequelize')
 
 module.exports = db => db.define('users', {
   name: STRING,
@@ -11,7 +11,30 @@ module.exports = db => db.define('users', {
     validate: {
       isEmail: true,
       notEmpty: true,
-    }
+    },
+  },
+  type: {
+    type: ENUM('admin', 'client', 'talent'),
+    defaultValue: 'client',
+    allowNull: false
+  },
+  shippingAddress: {
+    type: STRING
+  },
+  billingAddress: {
+    type: STRING
+  },
+  phoneNumber:  {
+    type: STRING
+  },
+  githubID: {
+    type: STRING
+  },
+  facebookID:{
+    type: STRING
+  },
+  googleID: {
+    type: STRING
   },
 
   // We support oauth, so users may or may not have passwords.
