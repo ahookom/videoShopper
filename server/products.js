@@ -13,32 +13,32 @@ module.exports = require('express').Router()
   .post('/',
     (req, res, next) =>
       Product.create(req.body)
-      .then(product => res.status(201).json(user))
+      .then(product => res.status(201).json(product))
       .catch(next))
-  .param("id", (req, res, next, id) => {
+  .param('id', (req, res, next, id) => {
     Product.findById(id)
       .then((foundProduct) => {
         if (!foundProduct) {
-          res.sendStatus(404);
+          res.sendStatus(404)
         } else {
-          req.product = foundProduct;
-          next();
+          req.product = foundProduct
+          next()
         }
       })
-      .catch(next);
+      .catch(next)
   })
   .get('/:id',
     (req, res, next) =>
       res.send(req.product))
   .put('/:id',
     mustBeLoggedIn,
-    //check if admin
+    /* check if admin */
     (req, res, next) => {
-     foundProduct.update (req.body)
+      req.product.update(req.body)
        .then((updatedProduct) => res.json(updatedProduct))
        .catch(next)
     })
     .delete('/:id', (req, res, next) => {
-      foundProduct.update({isActive: false})
+      req.product.update({isActive: false})
       .then(res.sendStatus(204))
     })
