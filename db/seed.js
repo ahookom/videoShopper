@@ -1,13 +1,14 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Thing, Favorite, Promise} = db
+    , {User, Thing, Favorite, Product, Promise} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
   const seeded = {
     users: users(),
     things: things(),
+    products: products()
   }
 
   seeded.favorites = favorites(seeded)
@@ -35,6 +36,25 @@ const things = seed(Thing, {
   surfing: {name: 'surfing'},
   smiting: {name: 'smiting'},
   puppies: {name: 'puppies'},
+})
+
+const products = seed(Product, {
+  photos1: {
+    name: 'Basic Photo Package',
+    description: 'Let us take product photos for your website, increasing traffic and sales! Send us your product and we will send you five professional photos on a white background for your product.',
+    price: '99',
+    leadTime: 7,
+    imageURL: 'https://static1.squarespace.com/static/586feeb08419c2130fdda9fb/587e69dbe58c621e10202f76/587e6a512e69cf0b68443078/1484679763661/Paper-photography-06.jpg?format=750w',
+    isActive: true
+  },
+  photos2: {
+    name: 'Premium Photo Package',
+    description: 'Let us take product photos for your website, increasing traffic and sales! Send us your product and we will send you ten professional photos on a white background for your product.',
+    price: '150',
+    leadTime: 14,
+    imageURL: 'https://static1.squarespace.com/static/586feeb08419c2130fdda9fb/587d6188c534a59c410c049e/587d6189be65944eb793fa80/1484611979834/Electronics_Photography_3.jpg?format=750w',
+    isActive: true
+  }
 })
 
 const favorites = seed(Favorite,
@@ -138,4 +158,4 @@ function seed(Model, rows) {
   }
 }
 
-module.exports = Object.assign(seed, {users, things, favorites})
+module.exports = Object.assign(seed, {users, things, favorites, products})
