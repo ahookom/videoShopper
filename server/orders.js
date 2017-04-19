@@ -32,6 +32,13 @@ module.exports = require('express').Router()
   .get('/:id',
     (req, res, next) =>
       res.send(req.order))
+  .put('/:id/product/:productId', (req, res, next)=>{
+    req.order.addProduct(req.params.productId)
+    .then(order => {
+      res.json(order)
+    })
+    .catch(next)
+  })
   .put('/:id',
     // mustBeLoggedIn,
     /* check if admin */
