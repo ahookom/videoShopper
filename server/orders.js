@@ -32,7 +32,7 @@ module.exports = require('express').Router()
       }
       User.findOrCreate({where: {user}})
       .spread((user, created) => {
-        Order.create({...req.body, user})
+        Order.create(Object.assign({}, req.body, {user}))
         .then(order => res.status(201).json(order))
         .catch(next)
       })
