@@ -14,26 +14,26 @@ module.exports = db => db.define('users', {
     },
   },
   type: {
-    type: ENUM('admin', 'client', 'talent'),
+    type: ENUM('admin', 'client', 'talent'), // talk about these. Who should be able to add products? Multiple accounts if you are more than one type of person? -- KHAG
     defaultValue: 'client',
     allowNull: false
   },
-  shippingAddress: {
+  shippingAddress: { // why the object? You don't use it for name above -- KHAG
     type: STRING
   },
-  billingAddress: {
+  billingAddress: { // why the object? You don't use it for name above -- KHAG
     type: STRING
   },
-  phoneNumber: {
+  phoneNumber: { // why the object? You don't use it for name above -- KHAG
     type: STRING
   },
-  githubID: {
+  githubID: { // look at associations -- KHAG
     type: STRING
   },
-  facebookID:{
+  facebookID:{ // look at associations -- KHAG
     type: STRING
   },
-  googleID: {
+  googleID: { // look at associations -- KHAG
     type: STRING
   },
 
@@ -59,10 +59,11 @@ module.exports = db => db.define('users', {
 })
 
 module.exports.associations = (User, {OAuth, Order, Favorite}) => {
-  User.hasOne(OAuth)
+  User.hasOne(OAuth) // this takes care of githubID, facebookID, googleID
   //AH: not sure what the line below might do like add methods for searching that we want but it
   //doesn't obviously work right now.
   // User.belongsToMany(Order, {through: 'Purchases', foreignKey: 'purchaser'})
+  // User HAS many orders -- KHAG
 }
 
 function setEmailAndPassword(user) {

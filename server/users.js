@@ -17,9 +17,9 @@ module.exports = require('express').Router()
       User.findAll()
       .then(users => res.json(users))
       .catch(next))
-  .post('/',
+  .post('/', // are you using this for signup? otherwise this should only be admin. If for signup you need to make sure to call req.logIn, but you need to make sure it isn't the admin just MAKING a user -- KHAG
     (req, res, next) =>
-      User.create(req.body)
+      User.create(req.body) // now that we have admin status, should we just use the req.body? -- KHAG
       .then(user => res.status(201).json(user))
       .catch(next))
   .get('/:id',
@@ -32,7 +32,7 @@ module.exports = require('express').Router()
     mustBeAdminOrSelf,
     (req, res, next) => {
       User.findById(req.params.id)
-      .then(user => user.update(req.body))
+      .then(user => user.update(req.body)) // now that we have admin status, should we just use the req.body? -- KHAG
       .then(res.send)
       .catch(next)
   })
