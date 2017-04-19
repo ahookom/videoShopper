@@ -18,7 +18,8 @@ const app = require('APP')
       Thing: require('./thing'),
       Favorite: require('./favorite'),
       Product: require('./product'),
-      Order: require('./order')
+      Order: require('./order'),
+      Review: require('./review')
       // ---------- Add new models here ----------
     }
     , {mapValues} = require('lodash')

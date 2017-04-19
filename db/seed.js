@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Thing, Favorite, Product, Order, Promise} = db
+    , {User, Thing, Favorite, Product, Order, Review, Promise} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
@@ -9,7 +9,8 @@ function seedEverything() {
     users: users(),
     things: things(),
     products: products(),
-    orders: orders()
+    orders: orders(),
+    reviews: reviews()
   }
 
   seeded.favorites = favorites(seeded)
@@ -63,6 +64,10 @@ const orders = seed(Order, {
   placedOrder: {status: 'completed', deliveryDay: new Date(), user: 2}
 })
 
+const reviews = seed(Review, {
+  simpleReview: {title: 'Best photos!!!', stars: 5, text: 'OMG like totes amazeballs'},
+  secondReview: {title: 'You call that a video?', stars: 1, text: 'My product was not visible and that guy did not sound like Morgan Freeman AT. ALL.'}
+})
 
 const favorites = seed(Favorite,
   // We're specifying a function here, rather than just a rows object.
