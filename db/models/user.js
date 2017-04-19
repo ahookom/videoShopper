@@ -24,7 +24,7 @@ module.exports = db => db.define('users', {
   billingAddress: {
     type: STRING
   },
-  phoneNumber:  {
+  phoneNumber: {
     type: STRING
   },
   githubID: {
