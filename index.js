@@ -40,6 +40,7 @@ try {
   Object.assign(env, additionalEnv)
   process.env = env
   debug('%s: %j', secretsFile, additionalEnv)
+  console.log('SECRET!!!!!',process.env.FACEBOOK_CLIENT_ID)
 } catch (error) {
   debug('%s: %s', secretsFile, error.message)
   debug('%s: env file not found or invalid, moving on', secretsFile)
