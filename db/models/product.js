@@ -22,10 +22,10 @@ module.exports = db => db.define('product', {
   isActive: {
     type: Sequelize.BOOLEAN,
     defaultValue: true
-  }
+  } // I would expect a defaultScope to have isActive filtered out -- KHAG
 })
 
 
 module.exports.associations = (Product, {Order}) => {
-  Product.belongsToMany(Order, {through: 'Purchases'})
+  Product.belongsToMany(Order, {through: 'Purchases'}) // I would consider have an actual table named Purchases - you need quantity of products and purchase price. What if the price changes? -- KHAG
 }
