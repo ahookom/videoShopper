@@ -11,7 +11,7 @@ module.exports = require('express').Router()
         .then(allReviews => res.json(allReviews))
         .catch(next))
   .post('/',
-    (req, res, next) =>{
+    (req, res, next) => {
       console.log('made it to reviews post with body of ', req.body)
       Review.create(req.body)
       .then(review => res.status(201).json(review))
@@ -23,29 +23,28 @@ module.exports = require('express').Router()
         if (!foundReview) {
           res.sendStatus(404)
         } else {
-          req.order = foundReview
+          req.review = foundReview
           next()
         }
       })
       .catch(next)
   })
-  .get('/:id', (req, res, next) => res.send(req.order))
-  .put('/:id/product/:productId', (req, res, next)=>{
-    req.order.addProduct(req.params.productId)
-    .then(order => {
-      res.json(order)
+  .get('/:id', (req, res, next) => res.send(req.review))
+  .put('/:id/product/:productId/', (req, res, next) => {
+    req.review.setProduct(req.params.productId)
+    .then(review => {
+      res.json(review)
     })
     .catch(next)
   })
-  .put('/:id',
-    // mustBeLoggedIn,
-    /* check if admin */
-    (req, res, next) => {
-      req.order.update(req.body)
-       .then((updatedOrder) => res.json(updatedOrder))
-       .catch(next)
+  .put('/:id/user/:userId/', (req, res, next) => {
+    req.review.setUser(req.params.userId)
+    .then(review => {
+      res.json(review)
     })
-    .delete('/:id', (req, res, next) => {
-      req.order.update({isActive: false})
-      .then(res.sendStatus(204))
-    })
+    .catch(next)
+  })
+  .delete('/:id', (req, res, next) => {
+    req.review.update({isActive: false})
+    .then(res.sendStatus(204))
+  })
