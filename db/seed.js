@@ -21,6 +21,7 @@ function seedEverything() {
 const users = seed(User, {
   god: {
     email: 'god@example.com',
+    type: 'admin',
     name: 'So many names',
     shippingAddress: '1600 Pearly Gate Burning Bush, Egypt 66666',
     phoneNumber: '316-316-5555',

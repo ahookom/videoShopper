@@ -2,20 +2,37 @@
 
 const {Order, Product, User} = require('APP/db')
 
-const {mustBeLoggedIn, forbidden} = require('./auth.filters')
+const {mustBeLoggedIn, forbidden, mustBeAdmin} = require('./auth.filters')
+
+function generateGuestInfo(){
+
+}
 
 module.exports = require('express').Router()
   .get('/',
+    mustBeAdmin,
     (req, res, next) =>
       Order.findAll()
         .then(orders => res.json(orders))
         .catch(next))
   .post('/',
-    (req, res, next) =>{
-      console.log('made it to orders post with body of ', req.body)
-      Order.create(req.body)
-      .then(order => res.status(201).json(order))
-      .catch(next)
+    (req, res, next) => {
+      let user = req.user
+      if (!user) {
+        let { shippingAddress, billingAddress, phoneNumber, name, email } = req.body
+        user.shippingAddress = shippingAddress
+        user.billingAddress = billingAddress
+        user.phoneNumber = phoneNumber
+        user.type = 'client'
+        user.name = name
+        user.email = email
+      }
+      User.findOrCreate({where: {user}})
+      .spread((user, created) => {
+        Order.create({...req.body, user})
+        .then(order => res.status(201).json(order))
+        .catch(next)
+      })
     })
   .param('id', (req, res, next, id) => {
     Order.findById(id)
@@ -23,8 +40,12 @@ module.exports = require('express').Router()
         if (!foundOrder) {
           res.sendStatus(404)
         } else {
-          req.order = foundOrder
-          next()
+          if (foundOrder.userId!==req.user&&req.user.type!=='admin') {
+            res.status(401).send('Only administrators can access other\'s order information.')
+          } else {
+            req.order = foundOrder
+            next()
+          }
         }
       })
       .catch(next)
