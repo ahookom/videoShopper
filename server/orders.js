@@ -4,22 +4,25 @@ const {Order, Product, User} = require('APP/db')
 
 const {mustBeLoggedIn, forbidden, mustBeAdmin} = require('./auth.filters')
 
-function generateGuestInfo(){
-
-}
-
 module.exports = require('express').Router()
   .get('/',
-    mustBeAdmin,
-    (req, res, next) =>
-      Order.findAll()
+    mustBeLoggedIn,
+    (req, res, next) => {
+      if (req.user.type==='admin') {
+        Order.findAll()
         .then(orders => res.json(orders))
-        .catch(next))
+        .catch(next)
+      } else {
+        Order.findAll({where: {userId: req.user.id}})
+        .then(orders => res.json(orders))
+        .catch(next)
+      }
+    })
   .post('/',
     (req, res, next) => {
-      let user = req.user
+      const user = req.user
       if (!user) {
-        let { shippingAddress, billingAddress, phoneNumber, name, email } = req.body
+        const { shippingAddress, billingAddress, phoneNumber, name, email } = req.body
         user.shippingAddress = shippingAddress
         user.billingAddress = billingAddress
         user.phoneNumber = phoneNumber
@@ -40,7 +43,7 @@ module.exports = require('express').Router()
         if (!foundOrder) {
           res.sendStatus(404)
         } else {
-          if (foundOrder.userId!==req.user&&req.user.type!=='admin') {
+          if (foundOrder.userId!==req.user.id && req.user.type!=='admin') {
             res.status(401).send('Only administrators can access other\'s order information.')
           } else {
             req.order = foundOrder
@@ -53,7 +56,7 @@ module.exports = require('express').Router()
   .get('/:id',
     (req, res, next) =>
       res.send(req.order))
-  .put('/:id/product/:productId', (req, res, next)=>{
+  .put('/:id/product/:productId', (req, res, next) => {
     req.order.addProduct(req.params.productId)
     .then(order => {
       res.json(order)
