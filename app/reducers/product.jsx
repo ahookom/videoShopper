@@ -1,8 +1,10 @@
 // Required libraries
 import axios from 'axios'
+import {findObjectByName} from './utility'
 
 // ----------- Actions
 const FETCH_PRODUCTS = 'FETCH_PRODUCTS'
+const SELECT_PRODUCT = 'SELECT_PRODUCT'
 
 // ----------- Action Creators
 export const receiveProducts = (products) => ({
@@ -10,9 +12,15 @@ export const receiveProducts = (products) => ({
   products
 })
 
+export const selectedProduct = (product) => ({
+  type: SELECT_PRODUCT,
+  product
+})
+
 // ----------- Reducer
 const initialState = {
-  allProducts: []
+  allProducts: [],
+  selectedProduct: {}
 }
 
 export default function productReducer(state = initialState, action) {
@@ -21,6 +29,10 @@ export default function productReducer(state = initialState, action) {
   switch (action.type) {
   case FETCH_PRODUCTS:
     nextState.allProducts = action.products
+    break
+
+  case SELECT_PRODUCT:
+    nextState.selectedProduct = findObjectByName(state.allProducts, action.product)
     break
 
   default:
