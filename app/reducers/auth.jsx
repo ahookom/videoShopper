@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const reducer = (state=null, action) => {
+const authReducer = (state=null, action) => {
   switch (action.type) {
   case AUTHENTICATED:
     return action.user
@@ -35,4 +35,4 @@ export const whoami = () =>
       })
       .catch(failed => dispatch(authenticated(null)))
 
-export default reducer
+export default authReducer
