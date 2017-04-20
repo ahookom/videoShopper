@@ -54,7 +54,8 @@ const products = seed(Product, {
     price: '99',
     leadTime: 7,
     imageURL: 'https://static1.squarespace.com/static/586feeb08419c2130fdda9fb/587e69dbe58c621e10202f76/587e6a512e69cf0b68443078/1484679763661/Paper-photography-06.jpg?format=750w',
-    isActive: true
+    isActive: true,
+    tags: ['blue', 'vermillion']
   },
   photos2: {
     name: 'Premium Photo Package',
@@ -62,7 +63,8 @@ const products = seed(Product, {
     price: '150',
     leadTime: 14,
     imageURL: 'https://static1.squarespace.com/static/586feeb08419c2130fdda9fb/587d6188c534a59c410c049e/587d6189be65944eb793fa80/1484611979834/Electronics_Photography_3.jpg?format=750w',
-    isActive: true
+    isActive: true,
+    tags: ['blue', 'customizable', 'flavored']
   }
 })
 
