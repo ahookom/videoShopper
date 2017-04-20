@@ -17,8 +17,7 @@ const ProductsView = (props) => {
                         <div className="list-group">
                             <a href="#" className="list-group-item">Product Videos</a>
                             <a href="#" className="list-group-item">Photo Packages</a>
-                            <a href="#" className="list-group-item">Review Videos</a>
-                            <a href="#" className="list-group-item">Review Videos</a>
+                            <a href="#" className="list-group-item">Complete Packages</a>
                         </div>
                     </div>
 

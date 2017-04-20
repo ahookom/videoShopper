@@ -7,7 +7,7 @@ const {mustBeLoggedIn, forbidden, mustBeAdmin} = require('./auth.filters')
 module.exports = require('express').Router()
   .get('/',
     (req, res, next) =>
-      Product.scope(req.user.type).findAll()
+      Product.scope(req.user.type ? req.user.type : 'client').findAll()
         .then(res.json)
         .catch(next))
   .post('/',
@@ -17,7 +17,7 @@ module.exports = require('express').Router()
       .then(product => res.status(201).json(product))
       .catch(next))
   .param('id', (req, res, next, id) => {
-    Product.scope(req.user.type).findById(id)
+    Product.scope(req.user.type ? req.user.type : 'client').findById(id)
       .then((foundProduct) => {
         if (!foundProduct) {
           res.sendStatus(404)

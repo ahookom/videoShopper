@@ -55,7 +55,7 @@ const products = seed(Product, {
     leadTime: 7,
     imageURL: 'https://static1.squarespace.com/static/586feeb08419c2130fdda9fb/587e69dbe58c621e10202f76/587e6a512e69cf0b68443078/1484679763661/Paper-photography-06.jpg?format=750w',
     isActive: true,
-    tags: ['blue', 'vermillion']
+    tags: ['blue', 'vermillion', 'deal', 'photo']
   },
   photos2: {
     name: 'Premium Photo Package',
@@ -64,7 +64,43 @@ const products = seed(Product, {
     leadTime: 14,
     imageURL: 'https://static1.squarespace.com/static/586feeb08419c2130fdda9fb/587d6188c534a59c410c049e/587d6189be65944eb793fa80/1484611979834/Electronics_Photography_3.jpg?format=750w',
     isActive: true,
-    tags: ['blue', 'customizable', 'flavored']
+    tags: ['blue', 'customizable', 'flavored', 'photo']
+  },
+  video1: {
+    name: 'Premium Video Package',
+    description: 'Let us make a custom video for your website, increasing traffic and sales! Send us your product and we will film a video with professional modeling, lighting and voiceover.',
+    price: '500',
+    leadTime: 14,
+    imageURL: 'https://static1.squarespace.com/static/586feeb08419c2130fdda9fb/587d6188c534a59c410c049e/587d6189be65944eb793fa80/1484611979834/Electronics_Photography_3.jpg?format=750w',
+    isActive: true,
+    tags: ['video', 'customizable', 'flavored']
+  },
+  video2: {
+    name: 'Standard Video Package',
+    description: 'Let us make a custom video for your website, increasing traffic and sales! Send us your product and we will film it under professional lighting.',
+    price: '31.89',
+    leadTime: 14,
+    imageURL: 'https://static1.squarespace.com/static/586feeb08419c2130fdda9fb/587d6188c534a59c410c049e/587d6189be65944eb793fa80/1484611979834/Electronics_Photography_3.jpg?format=750w',
+    isActive: true,
+    tags: ['video', 'customizable', 'deal']
+  },
+  bundle1: {
+    name: 'Standard Package of Video and Photos',
+    description: 'Save when you buy photos and videos together! Let us make a custom video for your website, increasing traffic and sales! Send us your product and we will film it under professional lighting.',
+    price: '199.75',
+    leadTime: 14,
+    imageURL: 'https://static1.squarespace.com/static/586feeb08419c2130fdda9fb/587d6188c534a59c410c049e/587d6189be65944eb793fa80/1484611979834/Electronics_Photography_3.jpg?format=750w',
+    isActive: true,
+    tags: ['deal', 'bundle']
+  },
+  bundle2: {
+    name: 'Premium Package of Custom Video and Photos',
+    description: 'Save when you buy photos and videos together! Let us make a custom video for your website, increasing traffic and sales! Send us your product and we will film it under professional lighting.',
+    price: '200.00',
+    leadTime: 14,
+    imageURL: 'https://static1.squarespace.com/static/586feeb08419c2130fdda9fb/587d6188c534a59c410c049e/587d6189be65944eb793fa80/1484611979834/Electronics_Photography_3.jpg?format=750w',
+    isActive: true,
+    tags: ['customizable', 'bundle']
   }
 })
 
