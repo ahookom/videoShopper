@@ -2,6 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import LoginBoxes from './LoginBoxes'
 
 // ------------- Component
 const NavBar = (props) => {
@@ -24,9 +25,13 @@ const NavBar = (props) => {
                     <li>
                         <Link to='/products'>Products</Link>
                     </li>
+                    <li>
+                        <LoginBoxes />
+                    </li>
                 </ul>
-            </div>
-          
+
+                
+            </div>     
         </div>
         
     </nav>
