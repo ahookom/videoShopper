@@ -1,6 +1,7 @@
 // Required libraries
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 
 // ------------- Component
 const NavBar = (props) => {
@@ -15,19 +16,13 @@ const NavBar = (props) => {
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                 </button>
-                <a className="navbar-brand" href="#">Start Bootstrap</a>
+                <Link className="navbar-brand" to="/">Video Shopper</Link>
             </div>
           
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <Link to='/products'>Products</Link>
                     </li>
                 </ul>
             </div>
