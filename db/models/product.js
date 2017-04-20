@@ -22,6 +22,14 @@ module.exports = db => db.define('product', {
   isActive: {
     type: Sequelize.BOOLEAN,
     defaultValue: true
+  },
+  tags: {
+    type: Sequelize.ARRAY(Sequelize.STRING),
+    defaultValue: [],
+    set: function(tags = []) {
+      tags = typeof tags !== 'string' ? tags : tags.split(',').map(str => str.trim())
+      this.setDataValue('tags', tags)
+    }
   }
 }, {
   defaultScope: {
