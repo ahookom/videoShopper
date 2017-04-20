@@ -43,6 +43,7 @@ export default function productReducer(state = initialState, action) {
 
 // ----------- Disptachers
 export const fetchProducts = () => (dispatch) => {
+  console.log('fetching products')
   axios.get('/api/products')
       .then(response => {
         dispatch(receiveProducts(response.data))

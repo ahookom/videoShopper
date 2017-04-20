@@ -19,6 +19,7 @@ import ProductsView from './components/ProductsView'
 import ProductView from './components/ProductView'
 import UserAccountView from './components/UserAccountView'
 
+import {fetchProducts} from './reducers/product'
 
 // const ExampleApp = connect(
 //  ({ auth }) => ({ user: auth })
@@ -32,11 +33,14 @@ import UserAccountView from './components/UserAccountView'
 //    </div>
 // )
 
+const handleFetchProducts = () => {
+  store.dispatch(fetchProducts())
+}
 
 render(
  <Provider store={store}>
    <Router history={browserHistory}>
-     <Route path="/" component={App} >
+     <Route path="/" component={App} onEnter={handleFetchProducts} >
        <Route path='/home' component={HomeView} />
        <Route path='/products' component={ProductsView} />
        <Route path='/product/:id' component={ProductView} />
@@ -51,5 +55,4 @@ render(
  </Provider>,
  document.getElementById('main')
 )
-
-//<Route path="/" component={ExampleApp}>
+// <Route path="/" component={ExampleApp}>
