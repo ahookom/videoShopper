@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // ------------- Component
-const Home = (props) => {
+const WelcomeBox = (props) => {
  return (
           <header className="jumbotron hero-spacer">
            <h1>A Warm Welcome!</h1>
@@ -19,4 +19,4 @@ const mapStateToProps = null;
 
 const mapDispatchToProps = null;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomeBox);

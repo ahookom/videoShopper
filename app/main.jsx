@@ -25,9 +25,7 @@ const ExampleApp = connect(
    </div>
 )
 
-
-    //   <IndexRedirect to="/" />
-
+//  <IndexRedirect to="/" />
 render(
  <Provider store={store}>
    <Router history={browserHistory}>
