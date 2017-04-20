@@ -43,7 +43,7 @@ module.exports = require('express').Router()
         if (!foundOrder) {
           res.sendStatus(404)
         } else {
-          if (foundOrder.userId!==req.user.id && req.user.type!=='admin') {
+          if (foundOrder.user_id!==req.user.id && req.user.type!=='admin') {
             res.status(401).send('Only administrators can access other\'s order information.')
           } else {
             req.order = foundOrder
@@ -63,15 +63,12 @@ module.exports = require('express').Router()
     })
     .catch(next)
   })
-  .put('/:id',
-    // mustBeLoggedIn,
-    /* check if admin */
-    (req, res, next) => {
-      req.order.update(req.body)
-       .then((updatedOrder) => res.json(updatedOrder))
-       .catch(next)
-    })
-    .delete('/:id', (req, res, next) => {
-      req.order.update({isActive: false})
-      .then(res.sendStatus(204))
-    })
+  .put('/:id', (req, res, next) => {
+    req.order.update(req.body)
+      .then((updatedOrder) => res.json(updatedOrder))
+      .catch(next)
+  })
+  .delete('/:id', (req, res, next) => {
+    req.order.update({status: 'deleted'})
+    .then(res.sendStatus(204))
+  })

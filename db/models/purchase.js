@@ -13,6 +13,6 @@ module.exports = db => db.define('purchase', {
   }
 })
 
-module.exports.associations = (Purchase, {Order, User, Product}) => {
+module.exports.associations = (Purchase, {Order, Product}) => {
   Purchase.belongsTo(Order)
 }
