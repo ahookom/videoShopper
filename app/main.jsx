@@ -25,13 +25,15 @@ const ExampleApp = connect(
    </div>
 )
 
-//  <IndexRedirect to="/" />
+
 render(
  <Provider store={store}>
    <Router history={browserHistory}>
      <Route path="/" component={Home} >
+          <IndexRedirect to="/" />
      </Route>
      <Route path='*' component={NotFound} />
+
    </Router>
  </Provider>,
  document.getElementById('main')
