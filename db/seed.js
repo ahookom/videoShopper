@@ -67,8 +67,8 @@ const products = seed(Product, {
 })
 
 const orders = seed(Order, {
-  simpleOrder: {status: 'inCart', deliveryDay: new Date(), user: 1},
-  placedOrder: {status: 'completed', deliveryDay: new Date(), user: 2}
+  simpleOrder: {status: 'inCart', deliveryDay: new Date()},
+  placedOrder: {status: 'completed', deliveryDay: new Date()}
 })
 
 const reviews = seed(Review, {
