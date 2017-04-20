@@ -7,7 +7,7 @@ const mustBeLoggedIn = (req, res, next) => {
 
 const mustBeAdminOrSelf = (req, res, next) => {
   if (req.user.type!=='admin'&&req.user.id!==req.params.id) {
-    res.status(401).send('Only administrators can access other user\'s information.')
+    res.status(401).send('Only administrators can access other users\'s information.')
   }
   next()
 }

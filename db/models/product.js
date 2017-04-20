@@ -11,7 +11,7 @@ module.exports = db => db.define('product', {
     type: Sequelize.TEXT
   },
   price: {
-    type: Sequelize.INTEGER
+    type: Sequelize.DECIMAL
   },
   leadTime: {
     type: Sequelize.INTEGER
@@ -23,9 +23,28 @@ module.exports = db => db.define('product', {
     type: Sequelize.BOOLEAN,
     defaultValue: true
   }
+}, {
+  defaultScope: {
+    where: {
+      isActive: true
+    }
+  },
+  scopes: {
+    admin: {},
+    client: {
+      where: {
+        isActive: true
+      }
+    },
+    talent: {
+      where: {
+        isActive: true
+      }
+    }
+  }
 })
 
-
-module.exports.associations = (Product, {Order}) => {
-  Product.belongsToMany(Order, {through: 'Purchases'})
+module.exports.associations = (Product, {Order, Purchase}) => {
+  Product.hasMany(Purchase)
+  Product.belongsToMany(Order, {through: Purchase})
 }

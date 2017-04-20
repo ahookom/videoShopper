@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Thing, Favorite, Product, Order, Review, Promise} = db
+    , {User, Thing, Favorite, Product, Order, Review, Purchase, Promise} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
@@ -10,7 +10,8 @@ function seedEverything() {
     things: things(),
     products: products(),
     orders: orders(),
-    reviews: reviews()
+    reviews: reviews(),
+    purchases: purchases()
   }
 
   seeded.favorites = favorites(seeded)
@@ -33,6 +34,11 @@ const users = seed(User, {
     email: 'barack@example.gov',
     password: '1234'
   },
+})
+
+const purchases = seed(Purchase, {
+  firstPurchase: {purchasePrice: 75.01, quantity: 3, product_id: 1, order_id: 1},
+  secondPurchase: {purchasePrice: 12.34, quantity: 1, product_id: 2, order_id: 1}
 })
 
 const things = seed(Thing, {
@@ -61,8 +67,8 @@ const products = seed(Product, {
 })
 
 const orders = seed(Order, {
-  simpleOrder: {status: 'inCart', deliveryDay: new Date(), user: 1},
-  placedOrder: {status: 'completed', deliveryDay: new Date(), user: 2}
+  simpleOrder: {status: 'inCart', deliveryDay: new Date()},
+  placedOrder: {status: 'completed', deliveryDay: new Date()}
 })
 
 const reviews = seed(Review, {
