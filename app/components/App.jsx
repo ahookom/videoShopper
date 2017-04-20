@@ -2,6 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import NavBar from './NavBar'
+//import LoginBoxes from './LoginBoxes'
 
 // ------------- Component
 const App = (props) => {
@@ -9,11 +10,12 @@ const App = (props) => {
 
      <div>
       <NavBar />
-       {props.children? props.children : null}
+    
+       {props.children ? props.children : null}
 
         <footer>
-            <div class="row">
-                <div class="col-lg-12">
+            <div className="row">
+                <div className="col-lg-12">
                     <p>Copyright &copy; Video Shopper 2017</p>
                 </div>
             </div>

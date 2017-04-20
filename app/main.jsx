@@ -19,18 +19,18 @@ import ProductsView from './components/ProductsView'
 import ProductView from './components/ProductView'
 import UserAccountView from './components/UserAccountView'
 
-//add to sign up/sign in component
-const ExampleApp = connect(
- ({ auth }) => ({ user: auth })
-)(
- ({ user, children }) =>
-   <div>
-     <nav>
-       {user ? <WhoAmI/> : <Login/>}
-     </nav>
-     {children}
-   </div>
-)
+
+// const ExampleApp = connect(
+//  ({ auth }) => ({ user: auth })
+// )(
+//  ({ user, children }) =>
+//    <div>
+//      <nav>
+//        {user ? <WhoAmI/> : <Login/>}
+//      </nav>
+//      {children}
+//    </div>
+// )
 
 
 render(
