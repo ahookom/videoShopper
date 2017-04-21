@@ -1,72 +1,48 @@
 // Required libraries
 import React from 'react'
 import { connect } from 'react-redux'
-import OrderRow from './OrderRow'
 
 
 // ------------- Component
-const AdminView = (props) => {
-    const orders = props.orders;
+const Table = (props) => {
+    const columns = props.columns;
+    const rows = props.rows;
+    const tableName = props.tableName;
 
  return (
-        <div>
-
-            <div className="container">
-
-                <div className="row">
-
-                    <div className="col-md-3">
-                        <p className="lead">Admin Panel</p>
-                        <div className="list-group">
-                            <a href="#" className="list-group-item">Orders</a>
-                            <a href="#" className="list-group-item">Products</a>
-                            <a href="#" className="list-group-item">Users</a>
-                        </div>
-                    </div>
-
-                    <div className="col-md-9">
-
-                        <div className="row">
-                            
-                        <div className="panel panel-default">
-                            <div className="panel-heading"> DataTables Advanced Tables</div>
-                            <div className="panel-body">
-                            <table width="100%" className="table table-striped table-bordered table-hover" id="dataTables-example">
-                                <thead>
-                                   <tr>
-                                       <th>Order ID</th>
-                                       <th>Status</th>
-                                       <th>User ID</th>
-                                   </tr>
-                               </thead>
-                               <tbody>
-                                   
-                                     {orders && orders.map((order, index) => <div key={index.toString()}><OrderRow order={order} /></div>)}
-                                 
-                                </tbody>
-                            </table>
-                            </div>
-                       </div>
-
-
-                    </div>
-                    </div>
-
-
-                </div>
+        <div className="row">
+            
+        <div className="panel panel-default">
+            <div className="panel-heading"> {tableName}</div>
+            <div className="panel-body">
+            <table width="100%" className="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                      {columns && columns.map((column,index)=> <th key={index}>{column}</th>)}
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        rows && rows.map((row,index) => <tr key = {index}> {
+                            Object.keys(row).map((columnName,index) => <td key={index}>{row[columnName]}</td>)
+                            } </tr>)
+                    }
+                  
+                </tbody>
+            </table>
             </div>
         </div>
+
+
+    </div>
+                 
     );
 };
 
 // ------------- Container
-const mapStateToProps = (state, ownProps) => {
-  return {
-    orders: state.orders.allOrders
-  }
-}
+const mapStateToProps = null;
 const mapDispatchToProps = null;
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminView);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
 
 
