@@ -6,7 +6,7 @@ import OrderRow from './OrderRow'
 
 // ------------- Component
 const AdminView = (props) => {
-        const orders = props.orders;
+    const orders = props.orders;
 
  return (
         <div>
@@ -40,7 +40,9 @@ const AdminView = (props) => {
                                    </tr>
                                </thead>
                                <tbody>
-                                    {orders && orders.map((order, index) => <div key={index.toString()}><OrderRow order={order} /></div>)}
+                                   
+                                     {orders && orders.map((order, index) => <div key={index.toString()}><OrderRow order={order} /></div>)}
+                                 
                                 </tbody>
                             </table>
                             </div>
