@@ -59,7 +59,7 @@ module.exports = db => db.define('users', {
 })
 
 module.exports.associations = (User, {OAuth, Order, Favorite}) => {
-  User.hasOne(OAuth) // this takes care of githubID, facebookID, googleID
+  User.hasOne(OAuth) // this takes care of githubID, facebookID, googleID -- KHAG
   //AH: not sure what the line below might do like add methods for searching that we want but it
   //doesn't obviously work right now.
   // User.belongsToMany(Order, {through: 'Purchases', foreignKey: 'purchaser'})

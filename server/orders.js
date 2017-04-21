@@ -18,8 +18,8 @@ module.exports = require('express').Router()
         .catch(next)
       }
       // try instead
-      // let query ={}
-      // if (notAdmin) {where....}
+      // let query = {}
+      // if (notAdmin) query = {where....}
       // once! Order.findAll(query) -- KHAG
     })
   .post('/',
@@ -28,6 +28,7 @@ module.exports = require('express').Router()
       if (!user) {
         // object.assign might clean this up (be careful of just using req.body if you do this) -- KHAG
         const { shippingAddress, billingAddress, phoneNumber, name, email } = req.body
+        // Object.assign(user, {shippingAddress}) -- KHAG
         user.shippingAddress = shippingAddress
         user.billingAddress = billingAddress
         user.phoneNumber = phoneNumber
@@ -35,8 +36,10 @@ module.exports = require('express').Router()
         user.name = name
         user.email = email
       }
-      User.findOrCreate({where: {user}})
+      User.findOrCreate({where: {user}}) // this where might create redundancy -- KHAG
       .spread((user, created) => { // we aren't using the second param so we don't actually need to define it -- KHAG
+        // Object.assign, for create -- KHAG
+        // check if there is already an inCart, if so just add to that don't create -- KHAG
         Order.create({...req.body, user}) // does this work? I thought it was es7 not es6. es6 spread only works on iterables -- KHAG
         .then(order => res.status(201).json(order))
         .catch(next)
@@ -68,10 +71,11 @@ module.exports = require('express').Router()
     })
     .catch(next)
   })
-  .put('/:id', // who can update orders? maybe a util of admin or own order? -- KHAG
+  .put('/:id',
     // mustBeLoggedIn,
     /* check if admin */
     (req, res, next) => {
+      // how will I change from cart to placed for all carts? By making a post possibly a put +1 -- KHAG
       req.order.update(req.body) // should a user be able to update EVERYTHING about an order? No, they shouldn't -- KHAG
        .then((updatedOrder) => res.json(updatedOrder)) // why parens around 1 param? You don't do that elsewhere -- KHAG
        .catch(next)
