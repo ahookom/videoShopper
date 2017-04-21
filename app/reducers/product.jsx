@@ -1,6 +1,6 @@
 // Required libraries
 import axios from 'axios'
-import {findObjectByName} from './utility'
+import {findObjectById} from './utility'
 
 // ----------- Actions
 const FETCH_PRODUCTS = 'FETCH_PRODUCTS'
@@ -12,10 +12,11 @@ export const receiveProducts = (products) => ({
   products
 })
 
-export const selectedProduct = (product) => ({
+export const selectedProduct = (selectedProduct) => ({
   type: SELECT_PRODUCT,
-  product
+  selectedProduct
 })
+
 
 // ----------- Reducer
 const initialState = {
@@ -32,7 +33,7 @@ export default function productReducer(state = initialState, action) {
     break
 
   case SELECT_PRODUCT:
-    nextState.selectedProduct = findObjectByName(state.allProducts, action.product)
+    nextState.selectedProduct = action.selectedProduct
     break
 
   default:
@@ -67,4 +68,14 @@ export const removeProduct = (productId) => (dispatch) => {
         dispatch(fetchProducts())
       })
       .catch(console.error)
+}
+
+export const getProductById = productId => {
+  return dispatch => {
+    axios.get(`/api/products/${productId}`)
+      .then(response => {
+        dispatch(selectedProduct(response.data))
+      })
+      .catch(console.err)
+  }
 }
