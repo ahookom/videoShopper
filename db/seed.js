@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('APP/db')
-    , {User, Thing, Favorite, Product, Order, Review, Purchase, Promise} = db
+    , {User, Thing, Favorite, Product, Order, Review, Purchase, Category, Promise} = db
     , {mapValues} = require('lodash')
 
 function seedEverything() {
@@ -11,7 +11,8 @@ function seedEverything() {
     products: products(),
     orders: orders(),
     reviews: reviews(),
-    purchases: purchases()
+    purchases: purchases(),
+    categories: categories()
   }
 
   seeded.favorites = favorites(seeded)
@@ -112,6 +113,27 @@ const orders = seed(Order, {
 const reviews = seed(Review, {
   simpleReview: {title: 'Best photos!!!', stars: 5, text: 'OMG like totes amazeballs', product_id: 2},
   secondReview: {title: 'You call that a video?', stars: 1, text: 'My product was not visible and that guy did not sound like Morgan Freeman AT. ALL.', product_id: 1}
+})
+
+const categories = seed(Category, {
+  videoCategory: {
+    title: 'Videos',
+    description: 'custom product videos with or without modelling and voiceover talent',
+    imageURL: 'http://noirexcellence.com/wp-content/uploads/2016/11/maxresdefault-1-800x500.jpg',
+    frontEndRoute: 'products/video'
+  },
+  photoCategory: {
+    title: 'Photos',
+    description: 'professionally done packages',
+    imageURL: 'http://www.portfolio.ideadunes.com/wp-content/uploads/2015/09/23-showing-goggles-on-white-background.jpg',
+    frontEndRoute: 'products/photo'
+  },
+  bundleCategory: {
+    title: 'Complete Packages',
+    description: 'save when you bundle',
+    imageURL: 'http://i778.photobucket.com/albums/yy66/riffeym/Stereo%20Stuff/_DSC9626.jpg',
+    frontEndRoute: 'products/bundle'
+  }
 })
 
 const favorites = seed(Favorite,
