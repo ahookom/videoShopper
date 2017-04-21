@@ -1,12 +1,14 @@
 // Required libraries
 import React from 'react'
 import { connect } from 'react-redux'
-import OrderRow from './OrderRow'
+import Table from './Table'
 
 
 // ------------- Component
 const AdminView = (props) => {
-        const orders = props.orders;
+        const rows = props.rows;
+        const columns = props.columns;
+        const tableName = "Orders";
 
  return (
         <div>
@@ -24,44 +26,27 @@ const AdminView = (props) => {
                         </div>
                     </div>
 
-                    <div className="col-md-9">
-
-                        <div className="row">
-                            
-                        <div className="panel panel-default">
-                            <div className="panel-heading"> DataTables Advanced Tables</div>
-                            <div className="panel-body">
-                            <table width="100%" className="table table-striped table-bordered table-hover" id="dataTables-example">
-                                <thead>
-                                   <tr>
-                                       <th>Order ID</th>
-                                       <th>Status</th>
-                                       <th>User ID</th>
-                                   </tr>
-                               </thead>
-                               <tbody>
-                                    {orders && orders.map((order, index) => <div key={index.toString()}><OrderRow order={order} /></div>)}
-                                </tbody>
-                            </table>
-                            </div>
-                       </div>
-
+                    <div className="col-md-9">     
+                        <Table 
+                            rows = {rows}
+                            columns = {columns}
+                            tableName = {tableName}
+                        />
 
                     </div>
-                    </div>
-
-
                 </div>
             </div>
-        </div>
+    </div>
     );
 };
 
 // ------------- Container
 const mapStateToProps = (state, ownProps) => {
-  return {
-    orders: state.orders.allOrders
-  }
+
+  return ({
+    rows: state.orders.allOrders,
+    columns: Object.keys(state.orders.allOrders[0])
+  })
 }
 const mapDispatchToProps = null;
 

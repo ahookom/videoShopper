@@ -12,7 +12,7 @@ export const receiveOrders = (orders) => ({
 
 // ----------- Reducer
 const initialState = {
-  allOrders: []
+  allOrders: [{}]
 }
 
 export default function orderReducer(state = initialState, action) {
