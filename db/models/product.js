@@ -31,6 +31,10 @@ module.exports = db => db.define('product', {
       this.setDataValue('tags', tags)
     }
   }
+  // ,
+  // rating: {
+  //   type: Sequelize.DECIMAL
+  // }
 })
 
 module.exports.associations = (Product, {Order, Purchase, Review}) => {
