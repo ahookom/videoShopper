@@ -110,8 +110,8 @@ const orders = seed(Order, {
 })
 
 const reviews = seed(Review, {
-  simpleReview: {title: 'Best photos!!!', stars: 5, text: 'OMG like totes amazeballs'},
-  secondReview: {title: 'You call that a video?', stars: 1, text: 'My product was not visible and that guy did not sound like Morgan Freeman AT. ALL.'}
+  simpleReview: {title: 'Best photos!!!', stars: 5, text: 'OMG like totes amazeballs', product_id: 2},
+  secondReview: {title: 'You call that a video?', stars: 1, text: 'My product was not visible and that guy did not sound like Morgan Freeman AT. ALL.', product_id: 1}
 })
 
 const favorites = seed(Favorite,

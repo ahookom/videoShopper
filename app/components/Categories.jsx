@@ -2,6 +2,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+function filterByTags(productArr, tags) {
+  if (!tags.length) {
+    return productArr
+  }
+  let filteredProducts = productArr.slice()
+  tags.forEach(tag => filteredProducts = filteredProducts.filter(product => product.tags.includes(tag)))
+
+  return filteredProducts
+}
+
 // ------------- Component
 const CategoriesView = (props) => {
 
@@ -17,7 +27,7 @@ const CategoriesView = (props) => {
         </div>
 
         <div className="row text-center">
-            
+
             <p> list out categories here (look at code started below that is commented out) </p>
         </div>
    </div>
@@ -48,4 +58,3 @@ export default connect(mapStateToProps, mapDispatchToProps)(CategoriesView);
 
             // ))
 
-           

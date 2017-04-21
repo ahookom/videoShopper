@@ -6,10 +6,11 @@ const {mustBeLoggedIn, forbidden, mustBeAdmin} = require('./auth.filters')
 
 module.exports = require('express').Router()
   .get('/',
-    (req, res, next) =>
-      Product.scope(req.user.type ? req.user.type : 'client').findAll()
-        .then(res.json)
-        .catch(next))
+    (req, res, next) => {
+      Product.scope(req.user && req.user.type==='admin' ? 'admin' : 'client').findAll()
+        .then(res.json.bind(res))
+        .catch(next)
+    })
   .post('/',
     mustBeAdmin,
     (req, res, next) =>

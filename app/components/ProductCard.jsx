@@ -1,24 +1,21 @@
 import React from 'react'
+import Stars from './Stars'
 
 export default (props) => {
   return (
   <div className="col-sm-4 col-lg-4 col-md-4">
       <div className="thumbnail">
-          <img src="http://placehold.it/320x150" alt="" />
+          <img src={props.product.imageURL} alt="" />
           <div className="caption">
-              <h4 className="pull-right">{`$${props.price}`}</h4>
-              <h4><a href="#">{props.name}</a>
+              <h4 className="pull-right">{`$${props.product.price}`}</h4>
+              <h4><a href={`product/${props.product.id}`}>{props.product.name}</a>
               </h4>
-              <p>{props.description}</p>
+              <p>{props.product.description}</p>
           </div>
           <div className="ratings">
-              <p className="pull-right">12 reviews</p>
+              <p className="pull-right">{props.product.reviews.length}</p>
               <p>
-                  <span className="glyphicon glyphicon-star"></span>
-                  <span className="glyphicon glyphicon-star"></span>
-                  <span className="glyphicon glyphicon-star"></span>
-                  <span className="glyphicon glyphicon-star"></span>
-                  <span className="glyphicon glyphicon-star-empty"></span>
+                <Stars rating={props.product.rating} />
               </p>
           </div>
       </div>
