@@ -11,8 +11,8 @@ class OrderForm extends React.Component {
       billingAdddress: props.auth ? props.auth.billingAddress : '',
       shippingAddress: props.auth ? props.auth.shippingAddress : '',
       phoneNumber: props.auth ? props.auth.phoneNumber : '',
-      userId: props.auth ? props.auth.userId : ''
     }
+      // userId: props.auth ? props.auth.userId : ''
 
     this.handleChangeName = this.handleChangeName.bind(this)
     this.handleChangeEmail = this.handleChangeEmail.bind(this)

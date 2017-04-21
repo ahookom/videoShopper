@@ -39,7 +39,7 @@ export const fetchOrders = () => (dispatch) => {
 }
 
 export const addOrder = (orderData) => (dispatch) => {
-  axios.post('/api/orders/add', orderData)
+  axios.post('/api/orders/', orderData)
       .then(() => {
         // dispatch(newOrder(response.data));
         dispatch(fetchOrders())

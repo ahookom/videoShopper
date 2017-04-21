@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import CategoriesView from './categories'
 
 // ------------- Component
-const HomeView = (props) => {
- return (
+const HomeView = (props) => (
 <div>
    <div className="container">
         <header className="jumbotron hero-spacer">
@@ -21,11 +20,10 @@ const HomeView = (props) => {
 
 </div>
  );
-};
 
 // ------------- Container
-const mapStateToProps = null;
+const mapStateToProps = null
 
-const mapDispatchToProps = null;
+const mapDispatchToProps = null
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeView);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeView)
