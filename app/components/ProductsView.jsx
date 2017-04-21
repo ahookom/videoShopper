@@ -47,8 +47,6 @@ class ProductsView extends Component {
 
           <div className="col-md-9">
 
-            <Carousel />
-
             <div className="row">
 
               {this.state.activeProducts.map((product, index) => <div key={index}><ProductCard product={product} /></div>)}

@@ -1,7 +1,7 @@
 // Required libraries
 import React from 'react'
 import { connect } from 'react-redux'
-import CategoriesView from './categories'
+import CategoriesContainer from './categoriesContainer'
 
 // ------------- Component
 const HomeView = (props) => {
@@ -16,16 +16,16 @@ const HomeView = (props) => {
        </header>
    </div>
 
-   <CategoriesView />
+   <CategoriesContainer />
 
 
 </div>
- );
-};
+ )
+}
 
 // ------------- Container
-const mapStateToProps = null;
+const mapStateToProps = null
 
-const mapDispatchToProps = null;
+const mapDispatchToProps = null
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeView);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeView)
