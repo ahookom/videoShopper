@@ -47,7 +47,9 @@ render(
    <Router history={browserHistory}>
      <Route path="/" component={App} onEnter={handleFetchProducts} >
        <Route path='/home' component={HomeView} />
-       <Route path='/products' component={ProductsView} />
+       <Route path='/products' component={ProductsView}>
+         <Route path='/products/:category' component={ProductsView} />
+       </Route>
        <Route path='/product/:id' component={ProductView} />
        <Route path='/user/:id' component={UserAccountView} />
        <Route path='/cart' component={CartView} />
