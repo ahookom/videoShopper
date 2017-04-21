@@ -43,10 +43,11 @@ export default function productReducer(state = initialState, action) {
 
 // ----------- Disptachers
 export const fetchProducts = () => (dispatch) => {
-  console.log('fetching products')
   axios.get('/api/products')
       .then(response => {
-        dispatch(receiveProducts(response.data))
+        let products = response.data
+        let productsWithRatings = products.map(product => ({...product, rating: product.reviews.reduce((acc, review) => acc+=review.stars, 0)/product.reviews.length}))
+        dispatch(receiveProducts(productsWithRatings))
       })
       .catch(console.error)
 }

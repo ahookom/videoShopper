@@ -31,29 +31,34 @@ module.exports = db => db.define('product', {
       this.setDataValue('tags', tags)
     }
   }
-}, {
-  defaultScope: {
-    where: {
-      isActive: true
-    }
-  },
-  scopes: {
-    admin: {},
-    client: {
-      where: {
-        isActive: true
-      }
-    },
-    talent: {
-      where: {
-        isActive: true
-      }
-    }
-  }
 })
 
 module.exports.associations = (Product, {Order, Purchase, Review}) => {
   Product.hasMany(Purchase)
   Product.hasMany(Review)
+
   Product.belongsToMany(Order, {through: Purchase})
+  Product.addScope('client',
+    {
+      where: {
+        isActive: true
+      },
+      include: [{
+        model: Review,
+        required: false
+      }]
+    }
+  )
+  Product.addScope('admin',
+    {
+      include: [{
+        model: Review,
+        required: false
+      }]
+    }
+  )
+  // Product.prototype.getRating = function() {
+  //   let reviews = this.getReviews()
+  //   return reviews.reduce((accumulator, review) => accumulator+=review.stars, 0)/reviews.length
+  // }
 }
