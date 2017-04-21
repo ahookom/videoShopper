@@ -6,12 +6,12 @@ class OrderForm extends React.Component {
   constructor(props) {
     super(props)
     console.log('~~props in OrderForm ', props)
-    this.state = {name: (props.auth.name || ''),
-      email: this.props.auth.email || '',
-      billingAdddress: this.props.auth.billingAddress || '',
-      shippingAddress: this.props.auth.shippingAddress || '',
-      phoneNumber: this.props.auth.phoneNumber || '',
-      userId: this.props.auth.userId || ''
+    this.state = {name: props.auth ? props.auth.name : '',
+      email: props.auth ? props.auth.email : '',
+      billingAdddress: props.auth ? props.auth.billingAddress : '',
+      shippingAddress: props.auth ? props.auth.shippingAddress : '',
+      phoneNumber: props.auth ? props.auth.phoneNumber : '',
+      userId: props.auth ? props.auth.userId : ''
     }
 
     this.handleChangeName = this.handleChangeName.bind(this)
