@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 
 // ------------- Component
 const ProductView = (props) => {
-  console.log('***********productId', props.productId)
-  console.log('***********product', props.product)
   return (
         <div>
             <link href="css/shop-item.css" rel="stylesheet" />
