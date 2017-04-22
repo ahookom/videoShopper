@@ -34,6 +34,10 @@ import {fetchOrders} from './reducers/order'
 //    </div>
 // )
 
+const handleFetchProducts = () => {
+  store.dispatch(fetchProducts())
+}
+
 const handleFetchOrders = () => {
   store.dispatch(fetchOrders());
 }
@@ -46,7 +50,7 @@ const onProductEnter = nextRouterState => {
 render(
  <Provider store={store}>
    <Router history={browserHistory}>
-     <Route path="/" component={App} >
+     <Route path="/" component={App} onEnter={handleFetchProducts} >
        <Route path='/home' component={HomeView} />
        <Route path='/products' component={ProductsView}>
          <Route path='/products/:category' component={ProductsView} />
