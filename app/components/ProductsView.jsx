@@ -18,6 +18,12 @@ class ProductsView extends Component {
     this.setActiveCategory=this.setActiveCategory.bind(this)
   }
 
+  componentDidMount(){
+    if(this.props.params.category){
+      this.setActiveCategory(this.props.params.category)
+    }
+  }
+
   setActiveCategory(category) {
     if (this.state.activeCategory!==category) {
       this.setState({
@@ -47,8 +53,6 @@ class ProductsView extends Component {
 
           <div className="col-md-9">
 
-            <Carousel />
-
             <div className="row">
 
               {this.state.activeProducts.map((product, index) => <div key={index}><ProductCard product={product} /></div>)}
@@ -73,10 +77,6 @@ const mapStateToProps = (state, ownProps) => (
   }
 )
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setProducts: (products) => dispatch(receiveProducts(products))
-  }
-}
+const mapDispatchToProps = null
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductsView)

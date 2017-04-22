@@ -2,16 +2,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import NavBar from './NavBar'
+import store from '../store'
+import { fetchCategories } from '../reducers/category.jsx'
+import { fetchProducts } from '../reducers/product.jsx'
 //import LoginBoxes from './LoginBoxes'
 
 // ------------- Component
-const App = (props) => {
-  return (
+class App extends React.Component {
+  componentDidMount() {
+    store.dispatch(fetchCategories())
+    store.dispatch(fetchProducts())
+  }
 
+  render() {
+    return (
      <div>
       <NavBar />
-    
-       {props.children ? props.children : null}
+
+       {this.props.children ? this.props.children : null}
 
         <footer>
             <div className="row">
@@ -21,8 +29,8 @@ const App = (props) => {
             </div>
         </footer>
     </div>
-
-  )
+    )
+  }
 }
 
 // ------------- Container

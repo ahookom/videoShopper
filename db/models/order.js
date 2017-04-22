@@ -10,6 +10,12 @@ module.exports = db => db.define('order', {
   deliveryDay: {
     type: Sequelize.DATEONLY,
     allowNull: false,
+  },
+  shippingAddress: {
+    type: Sequelize.STRING
+  },
+  billingAddress: {
+    type: Sequelize.STRING
   }
 },
   {
@@ -18,7 +24,8 @@ module.exports = db => db.define('order', {
         status: {
           $ne: 'deleted'
         }
-      }
+      },
+      include: [db.model('product'), db.model('user')]
     }
   })
 
