@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router'
 import Stars from './Stars'
 
 export default (props) => {
@@ -8,7 +9,7 @@ export default (props) => {
           <img src={props.product.imageURL} alt="" />
           <div className="caption">
               <h4 className="pull-right">{`$${props.product.price}`}</h4>
-              <h4><a href={`product/${props.product.id}`}>{props.product.name}</a>
+              <h4><Link to={`/product/${props.product.id}`}>{props.product.name}</Link>
               </h4>
               <p>{props.product.description}</p>
           </div>
