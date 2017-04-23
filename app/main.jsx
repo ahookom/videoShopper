@@ -43,12 +43,17 @@ const onProductEnter = nextRouterState => {
   store.dispatch(getProductById(productId))
 }
 
+// const handleFetchProducts = (nextRouterState, replace, done) => {
+//   store.dispatch(fetchProducts())
+//   .then(() => done())
+// }
+
 render(
  <Provider store={store}>
    <Router history={browserHistory}>
      <Route path="/" component={App} >
        <Route path='/home' component={HomeView} />
-       <Route path='/products' component={ProductsView}>
+       <Route path='/products' component={ProductsView} >
          <Route path='/products/:category' component={ProductsView} />
        </Route>
        <Route path='/product/:id' component={ProductView} onEnter={onProductEnter}/>
