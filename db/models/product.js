@@ -23,20 +23,20 @@ module.exports = db => db.define('product', {
     type: Sequelize.BOOLEAN,
     defaultValue: true
   },
-  // rating: {
-  //   type: Sequelize.VIRTUAL,
-  //   get: () => {
-  //     console.log('in rating get', 'this is', this, 'and reviewsArr is', this.reviewsArr)
-  //     let reviewArr = this.reviewsArr
-  //     return reviewArr.reduce((accum, review) => accum+=review.stars, 0)/reviewArr.length
-  //   }
-  // },
-  // reviewsArr: {
-  //   type: Sequelize.VIRTUAL,
-  //   get: () => {
-  //     return db.model('review').findAll({where: {product_id: this.id}})
-  //   }
-  // },
+  rating: {
+    type: Sequelize.VIRTUAL,
+    get: function() {
+      // console.log('in rating get', 'this is', this, 'and reviewsArr is', this.reviewsArr)
+      let reviewArr = this.reviewsArr
+      return reviewArr.reduce((accum, review) => accum+=review.stars, 0)/reviewArr.length
+    }
+  },
+  reviewsArr: {
+    type: Sequelize.VIRTUAL,
+    get: function() {
+      return db.model('review').findAll({where: {product_id: this.id}})
+    }
+  },
   tags: {
     type: Sequelize.ARRAY(Sequelize.STRING),
     defaultValue: [],

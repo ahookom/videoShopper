@@ -19,7 +19,7 @@ import ProductsView from './components/ProductsView'
 import ProductView from './components/ProductView'
 import UserAccountView from './components/UserAccountView'
 
-
+import {fetchProducts, getProductById} from './reducers/product'
 import {fetchOrders} from './reducers/order'
 
 // const ExampleApp = connect(
@@ -38,15 +38,25 @@ const handleFetchOrders = () => {
   store.dispatch(fetchOrders());
 }
 
+const onProductEnter = nextRouterState => {
+  const productId = nextRouterState.params.id
+  store.dispatch(getProductById(productId))
+}
+
+// const handleFetchProducts = (nextRouterState, replace, done) => {
+//   store.dispatch(fetchProducts())
+//   .then(() => done())
+// }
+
 render(
  <Provider store={store}>
    <Router history={browserHistory}>
      <Route path="/" component={App} >
        <Route path='/home' component={HomeView} />
-       <Route path='/products' component={ProductsView}>
+       <Route path='/products' component={ProductsView} >
          <Route path='/products/:category' component={ProductsView} />
        </Route>
-       <Route path='/product/:id' component={ProductView} />
+       <Route path='/product/:id' component={ProductView} onEnter={onProductEnter}/>
        <Route path='/user/:id' component={UserAccountView} />
        <Route path='/cart' component={CartView} />
        <Route path='/admin' component={AdminView} onEnter={handleFetchOrders} />

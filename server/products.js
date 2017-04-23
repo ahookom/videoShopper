@@ -18,7 +18,7 @@ module.exports = require('express').Router()
       .then(product => res.status(201).json(product))
       .catch(next))
   .param('id', (req, res, next, id) => {
-    Product.scope(req.user.type ? req.user.type : 'client').findById(id)
+    Product.scope(req.user && req.user.type==='admin' ? 'admin' : 'client').findById(id)
       .then((foundProduct) => {
         if (!foundProduct) {
           res.sendStatus(404)
