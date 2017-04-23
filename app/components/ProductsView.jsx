@@ -13,27 +13,38 @@ class ProductsView extends Component {
     super(props)
     this.state = {
       activeCategory: '',
-      activeProducts: props.products
+      activeProducts: props.products,
+      products: props.products
     }
     this.setActiveCategory=this.setActiveCategory.bind(this)
   }
 
-  componentDidMount(){
-    if(this.props.params.category){
+  componentDidMount() {
+    if (this.props.params.category) {
       this.setActiveCategory(this.props.params.category)
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.state.products.length!==nextProps.products.length) {
+
+      this.setState({
+        products: nextProps.products,
+        activeProducts: this.state.activeCategory ? nextProps.products.filter(product => product.tags.includes(this.state.activeCategory)) : nextProps.products
+      })
+    }
+  }
+
   setActiveCategory(category) {
-    if (this.state.activeCategory!==category) {
+    if (this.state.activeCategory !== category) {
       this.setState({
         activeCategory: category,
-        activeProducts: this.props.products.filter(product => product.tags.includes(category))
+        activeProducts: this.state.products.filter(product => product.tags.includes(category))
       })
     } else {
       this.setState({
         activeCategory: '',
-        activeProducts: this.props.products
+        activeProducts: this.state.products
       })
     }
   }
@@ -42,8 +53,6 @@ class ProductsView extends Component {
     return (
 
     <div>
-
-      <link href="css/shop-homepage.css" rel="stylesheet" />
 
       <div className="container">
 
