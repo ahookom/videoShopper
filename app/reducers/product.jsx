@@ -21,7 +21,7 @@ export const setSelectedProductId = (selectedProductId) => ({
 // ----------- Reducer
 const initialState = {
   allProducts: [],
-  selectedProductId: {}
+  selectedProductId: 0
 }
 
 export default function productReducer(state = initialState, action) {

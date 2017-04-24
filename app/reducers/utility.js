@@ -9,3 +9,6 @@ export const removeElement = (array, element) => {
 
 export const findObjectByName = (arr, name) =>
   arr.find(obj => obj.name === name)
+
+export const findObjectById = (arr, id) =>
+  arr.find(obj => obj.id === +id)
