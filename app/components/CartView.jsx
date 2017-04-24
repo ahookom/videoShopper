@@ -20,7 +20,6 @@ class CartView extends React.Component {
   }
 
   findProductNameById(id) {
-    console.log(this.props.products)
     let productArr = this.props.products.filter(product => product.id===id)
     return productArr[0].name
   }
@@ -32,9 +31,11 @@ class CartView extends React.Component {
 
   render() {
     let { Products } = JSON.parse(window.localStorage.cart)
-    // Products=this.fetchProductNames(Products)
+    if (this.props.products.length) {
+      this.fetchProductNames(Products)
+    }
     let tableName = 'Orders'
-    let orderColumns = Object.keys(Products[0])
+    let orderColumns = Products.length ? Object.keys(Products[0]) : []
     let orderRows = Products
     return (
           <header className="jumbotron hero-spacer">
