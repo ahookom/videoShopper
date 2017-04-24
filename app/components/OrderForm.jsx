@@ -9,7 +9,7 @@ export class OrderForm extends React.Component {
       this.state = {
         name: props.auth.name ? props.auth.name : '',
         email: props.auth.email ? props.auth.email : '',
-        billingAdddress: props.auth.billingAddress ? props.auth.billingAddress : '',
+        billingAddress: props.auth.billingAddress ? props.auth.billingAddress : '',
         shippingAddress: props.auth.shippingAddress ? props.auth.shippingAddress : '',
         phoneNumber: props.auth.phoneNumber ? props.auth.phoneNumber : ''
       }
@@ -17,7 +17,7 @@ export class OrderForm extends React.Component {
       this.state = {
         name: '',
         email: '',
-        billingAdddress: '',
+        billingAddress: '',
         shippingAddress: '',
         phoneNumber: ''
       }
@@ -56,7 +56,7 @@ export class OrderForm extends React.Component {
     event.preventDefault()
     const orderData = {
       shippingAddress: this.state.shippingAddress,
-      billingAdddress: this.state.billingAdddress,
+      billingAddress: this.state.billingAddress,
       phoneNumber: this.state.phoneNumber,
       name: this.state.name,
       email: this.state.email
