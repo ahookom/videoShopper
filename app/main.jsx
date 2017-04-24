@@ -47,11 +47,17 @@ const onProductEnter = nextRouterState => {
 //   store.dispatch(fetchProducts())
 //   .then(() => done())
 // }
+function establishCart() {
+    if (!window.localStorage || Object.keys(window.localStorage.cart).length < 1) {
+      console.log('inside APP if loop')
+      window.localStorage.cart=JSON.stringify({Products: []})
+    }
+}
 
 render(
  <Provider store={store}>
    <Router history={browserHistory}>
-     <Route path="/" component={App} >
+     <Route path="/" component={App} onEnter={establishCart}>
        <Route path='/home' component={HomeView} />
        <Route path='/products' component={ProductsView} >
          <Route path='/products/:category' component={ProductsView} />
