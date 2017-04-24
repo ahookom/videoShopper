@@ -31,15 +31,15 @@ describe('<OrderForm />', () => {
     const addOrder = spy()
     const root = shallow(<OrderForm addOrder={addOrder}/>)
     const submitEvent = {
-      preventDefault: spy(),
-      target: {
-        shippingAddress: {value: '1600 Home'},
-        billingAddress: {value: '1600 Home'},
-        phoneNumber: {value: '316-316-1234'},
-        name: {value: 'Bruce'},
-        email: {value: 'bcg@bcg.com'}
-      }
+      preventDefault: spy()
     }
+    root.setState({
+      shippingAddress: '1600 Home',
+      billingAddress: '1600 Home',
+      phoneNumber: '316-316-1234',
+      name: 'Bruce',
+      email: 'bcg@bcg.com'
+    })
 
     beforeEach('submit', () => {
       addOrder.reset()
@@ -47,11 +47,15 @@ describe('<OrderForm />', () => {
       root.simulate('submit', submitEvent)
     })
 
-    // it('calls props.addOrder with credentials', () => {
-    //   expect(addOrder).to.have.been.calledWith(
-    //     submitEvent.target
-    //   )
-    // })
+    it('calls props.addOrder with credentials', () => {
+      expect(addOrder).to.have.been.calledWith({
+        shippingAddress: '1600 Home',
+        billingAddress: '1600 Home',
+        phoneNumber: '316-316-1234',
+        name: 'Bruce',
+        email: 'bcg@bcg.com'
+      })
+    })
 
     it('calls preventDefault', () => {
       expect(submitEvent.preventDefault).to.have.been.called
