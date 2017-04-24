@@ -21,6 +21,7 @@ import UserAccountView from './components/UserAccountView'
 
 import {fetchProducts, getProductById} from './reducers/product'
 import {fetchOrders} from './reducers/order'
+import {fetchUsers} from './reducers/user'
 
 // const ExampleApp = connect(
 //  ({ auth }) => ({ user: auth })
@@ -35,7 +36,8 @@ import {fetchOrders} from './reducers/order'
 // )
 
 const handleFetchOrders = () => {
-  store.dispatch(fetchOrders())
+  store.dispatch(fetchOrders());
+  store.dispatch(fetchUsers());
 }
 
 const onProductEnter = nextRouterState => {
