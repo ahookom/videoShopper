@@ -21,19 +21,18 @@ module.exports = require('express').Router()
     .then(allReviews => res.json(allReviews))
     .catch(next))
   .get('/:id', (req, res, next) => res.send(req.review))
-  .post('/product/:productId/', mustBeLoggedIn, (req, res, next) => {
-    let review
-    Review.create(req.body)
-    .then(createdReview => {
-      review = createdReview
-      return review.setProduct(req.params.productId)
-    })
-    .then(reviewWithProductID => {
-      return review.setUser(req.user.id)
-    })
-    .then(review => res.status(201).json(review))
-    .catch(next)
-  })
+.post('/product/:productId/',
+mustBeLoggedIn,
+(req, res, next) => {
+  Review.create(req.body)
+  .then(createdReview =>
+    Promise.all([
+      createdReview.setProduct(req.params.productId),
+      createdReview.setUser(req.user.id)])
+  )
+  .then(reviewArray => res.status(201).json(reviewArray[0]))
+  .catch(next)
+})
   .put('/:id/product/:productId', mustBeAdminOrSelf, (req, res, next) => {
     const {title, text, stars, isActive} = req.body
     Review.findById(req.params.id)

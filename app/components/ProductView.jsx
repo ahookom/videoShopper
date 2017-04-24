@@ -1,10 +1,40 @@
 // Required libraries
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 // ------------- Component
-const ProductView = (props) => {
-  return (
+// const ProductView = (props) => {
+//     console.log(props)
+
+class ProductView extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      productId: props.productId,
+      allProducts: props.allProducts,
+      selectedProduct: {}
+    }
+    this.selectProduct = this.selectProduct.bind(this)
+  }
+
+  componentWillReceiveProps(receivedProps) {
+    if (!this.state.allProducts) {
+      this.setState({
+        productId: receivedProps.selectedProductId,
+        allProducts: receivedProps.products,
+        selectedProduct: receivedProps.products[receivedProps.selectedProductId]
+      })
+    }
+  }
+
+//        selectedProduct: this.selectProduct(receivedProps.selectedProductId)
+//   selectProduct(productId){
+//     return
+//   }
+
+  render() {
+      console.log('****************', this.state.selectedProduct)
+      return (
         <div>
             <link href="/css/shop-item.css" rel="stylesheet" />
             <div className="container">
@@ -25,10 +55,10 @@ const ProductView = (props) => {
                         <div className="thumbnail">
                             <img className="img-responsive" src="http://placehold.it/800x300" alt="" />
                             <div className="caption-full">
-                                <h4 className="pull-right">{props.product.price}</h4>
-                                <h4><a href="#">{props.product.name}</a>
+                                <h4 className="pull-right">{this.state.selectedProduct.price}</h4>
+                                <h4><a href="#">{this.state.selectedProduct.name}</a>
                                 </h4>
-                                <p>{props.product.description}</p>
+                                <p>{this.state.selectedProduct.description}</p>
                             </div>
                             <div className="ratings">
                                 <p className="pull-right">3 reviews</p>
@@ -103,13 +133,16 @@ const ProductView = (props) => {
             </div>
 
         </div>
-    )
+      )
+  }
 }
+
 
 // ------------- Container
 const mapStateToProps = (state, ownProps) => (
   {
-    product: state.products.selectedProduct
+    productId: state.products.selectedProductId,
+    allProducts: state.products.allProducts
   }
 )
 

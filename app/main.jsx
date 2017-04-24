@@ -19,7 +19,7 @@ import ProductsView from './components/ProductsView'
 import ProductView from './components/ProductView'
 import UserAccountView from './components/UserAccountView'
 
-import {fetchProducts, getProductById} from './reducers/product'
+import {fetchProducts, setSelectedProductId} from './reducers/product'
 import {fetchOrders} from './reducers/order'
 
 // const ExampleApp = connect(
@@ -40,7 +40,7 @@ const handleFetchOrders = () => {
 
 const onProductEnter = nextRouterState => {
   const productId = nextRouterState.params.id
-  store.dispatch(getProductById(productId))
+  store.dispatch(setSelectedProductId(productId))
 }
 
 // const handleFetchProducts = (nextRouterState, replace, done) => {
