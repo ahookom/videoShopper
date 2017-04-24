@@ -11,7 +11,7 @@ const DeleteButton = (props) => {
 
 
     return (
-        <button onclick={onButtonClick()}>X</button>
+        <button onClick={onButtonClick}>X</button>
     );
 };
 
