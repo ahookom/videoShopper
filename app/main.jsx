@@ -51,7 +51,6 @@ const onProductEnter = nextRouterState => {
 // }
 function establishCart() {
   if (!window.localStorage.cart || Object.keys(window.localStorage.cart).length < 1) {
-    console.log('inside APP if loop')
     window.localStorage.cart=JSON.stringify({Products: []})
   }
 }
