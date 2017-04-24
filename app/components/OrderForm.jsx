@@ -5,22 +5,23 @@ import {addOrder} from '../reducers/order'
 export class OrderForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      name: '',
-      email: '',
-      billingAdddress: '',
-      shippingAddress: '',
-      phoneNumber: ''
-    }
     if (props.auth) {
-      this.setState({
+      this.state = {
         name: props.auth.name ? props.auth.name : '',
         email: props.auth.email ? props.auth.email : '',
-        billingAdddress: props.auth.billingAddress ? props.auth.billingAddress : '',
+        billingAddress: props.auth.billingAddress ? props.auth.billingAddress : '',
         shippingAddress: props.auth.shippingAddress ? props.auth.shippingAddress : '',
         phoneNumber: props.auth.phoneNumber ? props.auth.phoneNumber : ''
-      })
-    }
+      }
+    } else {
+      this.state = {
+        name: '',
+        email: '',
+        billingAddress: '',
+        shippingAddress: '',
+        phoneNumber: ''
+      }
+      }
       // userId: props.auth ? props.auth.userId : ''
 
     this.handleChangeName = this.handleChangeName.bind(this)
@@ -55,11 +56,12 @@ export class OrderForm extends React.Component {
     event.preventDefault()
     const orderData = {
       shippingAddress: this.state.shippingAddress,
-      billingAdddress: this.state.billingAdddress,
+      billingAddress: this.state.billingAddress,
       phoneNumber: this.state.phoneNumber,
       name: this.state.name,
       email: this.state.email
     }
+    // console.log('~~in order form ', event.target.shippingAddress.value)
     this.props.addOrder(orderData)
   }
 

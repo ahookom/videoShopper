@@ -12,6 +12,9 @@ class App extends React.Component {
   componentDidMount() {
     store.dispatch(fetchCategories())
     store.dispatch(fetchProducts())
+
+    // initialize cart
+
   }
 
   render() {
