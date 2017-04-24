@@ -15,7 +15,6 @@ class CartView extends React.Component {
   handleClick(event) {
     event.preventDefault()
     this.setState(prevState => ({displayOrderForm: !prevState.displayOrderForm}))
-    console.log('~~~in CartView - displayOrderForm: ', this.state.displayOrderForm)
   }
 
   render() {

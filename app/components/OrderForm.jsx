@@ -1,17 +1,25 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {addOrder} from '../reducers/order'
-import store from '../store'
 
-class OrderForm extends React.Component {
+export class OrderForm extends React.Component {
   constructor(props) {
     super(props)
-    console.log('~~props in OrderForm ', props)
-    this.state = {name: props.auth ? props.auth.name : '',
-      email: props.auth ? props.auth.email : '',
-      billingAdddress: props.auth ? props.auth.billingAddress : '',
-      shippingAddress: props.auth ? props.auth.shippingAddress : '',
-      phoneNumber: props.auth ? props.auth.phoneNumber : '',
+    this.state = {
+      name: '',
+      email: '',
+      billingAdddress: '',
+      shippingAddress: '',
+      phoneNumber: ''
+    }
+    if (props.auth) {
+      this.setState({
+        name: props.auth.name ? props.auth.name : '',
+        email: props.auth.email ? props.auth.email : '',
+        billingAdddress: props.auth.billingAddress ? props.auth.billingAddress : '',
+        shippingAddress: props.auth.shippingAddress ? props.auth.shippingAddress : '',
+        phoneNumber: props.auth.phoneNumber ? props.auth.phoneNumber : ''
+      })
     }
       // userId: props.auth ? props.auth.userId : ''
 
@@ -45,11 +53,12 @@ class OrderForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const orderData = {name: this.state.name,
-      email: this.state.email,
-      billingAdddress: this.state.billingAdddress,
+    const orderData = {
       shippingAddress: this.state.shippingAddress,
-      phoneNumber: this.state.phoneNumber
+      billingAdddress: this.state.billingAdddress,
+      phoneNumber: this.state.phoneNumber,
+      name: this.state.name,
+      email: this.state.email
     }
     this.props.addOrder(orderData)
   }

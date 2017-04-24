@@ -5,9 +5,10 @@ import {shallow} from 'enzyme'
 import {spy} from 'sinon'
 chai.use(require('sinon-chai'))
 import {connect} from 'react-redux'
-import store from '../store'
+// import configureMockStore from 'redux-mock-store'
 
-import OrderForm from './OrderForm'
+// import undecorated component, not the connected component
+import {OrderForm} from './OrderForm'
 
 /* global describe it beforeEach */
 describe('<OrderForm />', () => {
@@ -16,14 +17,9 @@ describe('<OrderForm />', () => {
     root = shallow(<OrderForm/>)
   )
 
-  it('shows a orderForm form', () => {
-    expect(root.find('input[type="text" value={this.state.name}]')).to.have.length(1)
-  })
-
-  it('shows a password field', () => {
-    const pw = root.find('input[name="password"]')
-    expect(pw).to.have.length(1)
-    expect(pw.at(0)).to.have.attr('type').equals('password')
+  it('shows an orderForm form', () => {
+    const inputText = root.find('input[type="text"]')
+    expect(inputText).to.have.length(5)
   })
 
   it('has a submit button', () => {
@@ -37,11 +33,11 @@ describe('<OrderForm />', () => {
     const submitEvent = {
       preventDefault: spy(),
       target: {
-        name: {value: 'So many names'},
-        email: {value: 'god@example.com'},
-        billingAddress: {value: '1600 PearlyGate Burning Bush, Egypt 66666'},
-        shippingAddress: {value: '1600 PearlyGate Burning Bush, Egypt 66666'},
-        poneNumber: {value: '316-316'},
+        shippingAddress: {value: '1600 Home'},
+        billingAddress: {value: '1600 Home'},
+        phoneNumber: {value: '316-316-1234'},
+        name: {value: 'Bruce'},
+        email: {value: 'bcg@bcg.com'}
       }
     }
 
@@ -53,7 +49,7 @@ describe('<OrderForm />', () => {
 
     it('calls props.addOrder with credentials', () => {
       expect(addOrder).to.have.been.calledWith(
-        submitEvent.orderData
+        submitEvent.target
       )
     })
 
