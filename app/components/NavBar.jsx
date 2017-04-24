@@ -4,9 +4,24 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import LoginBoxes from './LoginBoxes'
 
+function countProducts(productsArr) {
+  return productsArr.reduce((accum, purchase) => accum+=purchase.quantity, 0)
+}
+
 // ------------- Component
 const NavBar = (props) => {
- return (
+  let cart = JSON.parse(window.localStorage.cart)
+
+  // seed a dummy purchase for testing purposes
+  if (!cart.Products.length) {
+    window.localStorage['cart'] = JSON.stringify({
+      Products: [ { product: 1, quantity: 2 } ]
+    })
+  }
+
+  const cartAmountDisplay = cart.Products.length ? '('+countProducts(JSON.parse(window.localStorage.cart).Products)+')' : ''
+
+  return (
 <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div className="container">
 
@@ -26,7 +41,7 @@ const NavBar = (props) => {
                         <Link to='/products'>Products</Link>
                     </li>
                     <li>
-                        <Link to='/cart'>{`Cart ${Object.keys(window.localStorage).length ? '('+Object.keys(window.localStorage).length+')' : ''}`}</Link>
+                        <Link to='/cart'>{`Cart ${cartAmountDisplay}`}</Link>
                     </li>
                     <li>
                         <LoginBoxes />
@@ -38,12 +53,12 @@ const NavBar = (props) => {
         </div>
 
     </nav>
- )
+  )
 }
 
 // ------------- Container
-const mapStateToProps = null;
+const mapStateToProps = null
 
-const mapDispatchToProps = null;
+const mapDispatchToProps = null
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

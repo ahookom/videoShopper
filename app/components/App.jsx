@@ -12,6 +12,11 @@ class App extends React.Component {
   componentDidMount() {
     store.dispatch(fetchCategories())
     store.dispatch(fetchProducts())
+
+    // initialize cart
+    let cart = JSON.parse(window.localStorage.cart)
+    if (!cart.Products)cart.Products=[]
+    window.localStorage.cart = JSON.stringify(cart)
   }
 
   render() {
