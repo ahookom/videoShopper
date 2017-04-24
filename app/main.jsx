@@ -35,7 +35,7 @@ import {fetchOrders} from './reducers/order'
 // )
 
 const handleFetchOrders = () => {
-  store.dispatch(fetchOrders());
+  store.dispatch(fetchOrders())
 }
 
 const onProductEnter = nextRouterState => {

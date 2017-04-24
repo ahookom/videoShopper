@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import CategoriesContainer from './categoriesContainer'
 
 // ------------- Component
-const HomeView = (props) => {
- return (
+const HomeView = (props) => (
 <div>
    <div className="container">
         <header className="jumbotron hero-spacer">
@@ -18,10 +17,8 @@ const HomeView = (props) => {
 
    <CategoriesContainer />
 
-
 </div>
  )
-}
 
 // ------------- Container
 const mapStateToProps = null
