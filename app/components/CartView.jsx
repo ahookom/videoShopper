@@ -21,7 +21,7 @@ class CartView extends React.Component {
 
   findProductNameById(id) {
     console.log(this.props.products)
-    let productArr = this.props.products.filter(product => product.id===id)
+    let productArr = this.props.products.filter(product => product.id===id) // utilize your utility file -AGKH
     return productArr[0].name
   }
 

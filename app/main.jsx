@@ -34,13 +34,13 @@ import {fetchUsers} from './reducers/user'
 //      {children}
 //    </div>
 // )
-
-const handleFetchOrders = () => {
+// Remove dead code, can always look at past commits - AGKH
+const handleFetchOrders = () => { // Change name to something like onAdminEnter - AGKH
   store.dispatch(fetchOrders());
   store.dispatch(fetchUsers());
 }
 
-const onProductEnter = nextRouterState => {
+const onProductEnter = nextRouterState => { // Like this! -AGKH
   const productId = nextRouterState.params.id
   store.dispatch(setSelectedProductId(productId))
 }
@@ -52,7 +52,7 @@ const onProductEnter = nextRouterState => {
 function establishCart() {
     if (!window.localStorage || Object.keys(window.localStorage.cart).length < 1) {
       console.log('inside APP if loop')
-      window.localStorage.cart=JSON.stringify({Products: []})
+      window.localStorage.cart=JSON.stringify({Products: []}) // Trying to access something that is undefined, getting errors -AGKH
     }
 }
 
@@ -76,4 +76,4 @@ render(
  </Provider>,
  document.getElementById('main')
 )
-// <Route path="/" component={ExampleApp}>
+// <Route path="/" component={ExampleApp}> // Take out dead code -AGKH

@@ -9,7 +9,7 @@ module.exports = db => db.define('order', {
   },
   deliveryDay: {
     type: Sequelize.DATEONLY,
-    // allowNull: false,
+    // allowNull: false, // remove this please -AGKH
   },
   shippingAddress: {
     type: Sequelize.STRING

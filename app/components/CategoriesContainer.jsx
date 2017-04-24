@@ -19,13 +19,13 @@ const bundleCategory = {
   title: 'Complete Packages',
   description: 'save when you bundle',
   imageURL: 'http://i778.photobucket.com/albums/yy66/riffeym/Stereo%20Stuff/_DSC9626.jpg',
-  frontEndRoute: 'products/bundle'
+  frontEndRoute: 'products/bundle' // don't hard code routes... consider a `TYPE` property then do `product/${TYPE}` -AGKH
 }
 
-let categories = [videoCategory, photoCategory, bundleCategory]
+let categories = [videoCategory, photoCategory, bundleCategory] // this shouldn't be in a react component, should be in DB -AGKH
 // ------------- Component
 const CategoriesContainer = (props) => {
-  if (props.categories)categories=props.categories
+  if (props.categories)categories=props.categories // referring to prop object that has nothing on the props -AGKH
   return (
     <div>
        <div className="row">
@@ -35,7 +35,7 @@ const CategoriesContainer = (props) => {
         </div>
 
         <div className="row text-center">
-            {categories.map((category, index) => <CategoryCard key={index} {...category} />)}
+            {categories.map((category, index) => <CategoryCard key={index} {...category} />)} // this categries is not referring to ones passed into the props -AGKH
         </div>
    </div>
  )
@@ -47,4 +47,3 @@ const mapStateToProps = null
 const mapDispatchToProps = null
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoriesContainer)
-

@@ -13,7 +13,7 @@ class ProductsView extends Component {
     super(props)
     this.state = {
       activeCategory: '',
-      activeProducts: props.products,
+      activeProducts: props.products, // you can push the logic of filtering into the reducer, as an option -AGKH
       products: props.products
     }
     this.setActiveCategory=this.setActiveCategory.bind(this)
@@ -25,11 +25,11 @@ class ProductsView extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) { // you can push the logic of filtering into the reducer, as an option -AGKH
     if (this.state.products.length!==nextProps.products.length) {
 
       this.setState({
-        products: nextProps.products,
+        products: nextProps.products, // why have products on the local state if you only use filtered products? -AGKH
         activeProducts: this.state.activeCategory ? nextProps.products.filter(product => product.tags.includes(this.state.activeCategory)) : nextProps.products
       })
     }
@@ -46,7 +46,7 @@ class ProductsView extends Component {
         activeCategory: '',
         activeProducts: this.state.products
       })
-    }
+    } // this can DRY up, maybe call setState once and pass it an object as a result of your logic -AGKH
   }
 
   render() {
@@ -54,7 +54,7 @@ class ProductsView extends Component {
 
     <div>
 
-      <div className="container">
+      <div className="container"> // maybe not so many enters, this looks weird -AGKH
 
         <div className="row">
 

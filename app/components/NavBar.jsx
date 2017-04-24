@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import LoginBoxes from './LoginBoxes'
 
-function countProducts(productsArr) {
+function countProducts(productsArr) { // maybe change name to countCartProducts, more meaningful on what it actually does -AGKH
   return productsArr.reduce((accum, purchase) => accum+=purchase.quantity, 0)
 }
 
@@ -19,10 +19,10 @@ const NavBar = (props) => {
     })
   }
 
-  const cartAmountDisplay = cart.Products.length ? '('+countProducts(JSON.parse(window.localStorage.cart).Products)+')' : ''
+  const cartAmountDisplay = cart.Products.length ? '('+countProducts(JSON.parse(window.localStorage.cart).Products)+')' : '' // consider using css to make this look nicer -AGKH
 
   return (
-<nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav className="navbar navbar-inverse navbar-fixed-top" role="navigation"> // watch indentation -AGKH
         <div className="container">
 
             <div className="navbar-header">

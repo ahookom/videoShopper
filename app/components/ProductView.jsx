@@ -11,7 +11,7 @@ const ProductView = (props) => {
     console.log('****************', product)
       return (
         <div>
-            <link href="/css/shop-item.css" rel="stylesheet" />
+            <link href="/css/shop-item.css" rel="stylesheet" /> // should be done in index.html
             <div className="container">
 
                 <div className="row">

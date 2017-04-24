@@ -5,7 +5,7 @@ export default (props) => {
   const title = props.title || 'Title'
   const description = props.description || 'Fantastic product for you!'
   const imageURL = props.imageURL || 'http://geekmom.com/wp-content/uploads/2015/12/Guardians-of-the-Galaxy.jpg'
-  const frontEndRoute = props.frontEndRoute || 'products'
+  const frontEndRoute = props.frontEndRoute || 'products' // is this for demo purposes? when this is grabbed from the DB it shouldn't be empty -AGKH
   return (
     <div className="col-md-3 col-sm-6 hero-feature">
       <div className="thumbnail">

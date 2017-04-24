@@ -10,7 +10,7 @@ import { fetchProducts } from '../reducers/product.jsx'
 // ------------- Component
 class App extends React.Component {
   componentDidMount() {
-    store.dispatch(fetchCategories())
+    store.dispatch(fetchCategories()) // Don't require in store in connected components, push logic to onEnter in your routes -AGKH
     store.dispatch(fetchProducts())
 
     // initialize cart
@@ -22,7 +22,7 @@ class App extends React.Component {
      <div>
       <NavBar />
 
-       {this.props.children ? this.props.children : null}
+       {this.props.children ? this.props.children : null} // you can just have this.props.children -AGKH
 
         <footer>
             <div className="row">

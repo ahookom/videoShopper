@@ -2,13 +2,13 @@ import React from 'react'
 import { Link } from 'react-router'
 import Stars from './Stars'
 
-export default (props) => {
+export default (props) => { // you can pull out product directly with destructuring { product } -AGKH
   return (
   <div className="col-sm-4 col-lg-4 col-md-4">
       <div className="thumbnail">
           <img src={props.product.imageURL} alt="" />
           <div className="caption">
-              <h4 className="pull-right">{`$${props.product.price}`}</h4>
+              <h4 className="pull-right">{`$${props.product.price}`}</h4> // you don't need to use the back ticks -AGKH ${variable}
               <h4><Link to={`/product/${props.product.id}`}>{props.product.name}</Link>
               </h4>
               <p>{props.product.description}</p>
