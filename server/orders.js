@@ -20,22 +20,26 @@ module.exports = require('express').Router()
     })
   .post('/',
     (req, res, next) => {
-      const user = req.user
+      const user = req.user || {}
       if (!user) {
         const { shippingAddress, billingAddress, phoneNumber, name, email } = req.body
         user.shippingAddress = shippingAddress
         user.billingAddress = billingAddress
         user.phoneNumber = phoneNumber
-        user.type = 'client'
+        // user.type = 'client'
         user.name = name
         user.email = email
       }
-      User.findOrCreate({where: {user}})
-      .spread((user, created) => {
-        Order.create(Object.assign({}, req.body, {user}))
+      // User.findOrCreate({where: {user}, defaults: user})
+      // .spread((user, created) => {
+      User.create(user)
+        .then(createdUser => {
+          console.log('in findorCreate')
+          const orderObj = {status: 'placed', userId: createdUser.id}
+          Order.create(orderObj)
         .then(order => res.status(201).json(order))
         .catch(next)
-      })
+        })
     })
   .param('id', (req, res, next, id) => {
     Order.findById(id)
