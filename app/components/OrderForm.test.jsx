@@ -4,6 +4,8 @@ chai.use(require('chai-enzyme')())
 import {shallow} from 'enzyme'
 import {spy} from 'sinon'
 chai.use(require('sinon-chai'))
+import {connect} from 'react-redux'
+import store from '../store'
 
 import OrderForm from './OrderForm'
 
@@ -30,26 +32,28 @@ describe('<OrderForm />', () => {
   })
 
   describe('when submitted', () => {
-    const login = spy()
-    const root = shallow(<Login login={login}/>)
+    const addOrder = spy()
+    const root = shallow(<OrderForm addOrder={addOrder}/>)
     const submitEvent = {
       preventDefault: spy(),
       target: {
-        username: {value: 'bones@example.com'},
-        password: {value: '12345'},
+        name: {value: 'So many names'},
+        email: {value: 'god@example.com'},
+        billingAddress: {value: '1600 PearlyGate Burning Bush, Egypt 66666'},
+        shippingAddress: {value: '1600 PearlyGate Burning Bush, Egypt 66666'},
+        poneNumber: {value: '316-316'},
       }
     }
 
     beforeEach('submit', () => {
-      login.reset()
+      addOrder.reset()
       submitEvent.preventDefault.reset()
       root.simulate('submit', submitEvent)
     })
 
-    it('calls props.login with credentials', () => {
-      expect(login).to.have.been.calledWith(
-        submitEvent.target.username.value,
-        submitEvent.target.password.value,
+    it('calls props.addOrder with credentials', () => {
+      expect(addOrder).to.have.been.calledWith(
+        submitEvent.orderData
       )
     })
 

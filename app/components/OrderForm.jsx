@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {addOrder} from '../reducers/order'
+import store from '../store'
 
 class OrderForm extends React.Component {
   constructor(props) {
