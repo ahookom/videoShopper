@@ -18,6 +18,7 @@ import CartView from './components/CartView'
 import ProductsView from './components/ProductsView'
 import ProductView from './components/ProductView'
 import UserAccountView from './components/UserAccountView'
+import Orders from './components/Orders'
 
 import {fetchProducts, getProductById} from './reducers/product'
 import {fetchOrders} from './reducers/order'
@@ -61,7 +62,9 @@ render(
        <Route path='/product/:id' component={ProductView} onEnter={onProductEnter}/>
        <Route path='/user/:id' component={UserAccountView} />
        <Route path='/cart' component={CartView} />
-       <Route path='/admin' component={AdminView} onEnter={handleFetchOrders} />
+       <Route path='/admin' component={AdminView} onEnter={handleFetchOrders} >
+        <Route path = '/admin/orders' component = {Orders} onEnter={handleFetchOrders}/>
+        </Route>
        <IndexRedirect to="/home" />
      </Route>
      <Route path='*' component={NotFound} />
