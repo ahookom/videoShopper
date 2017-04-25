@@ -45,9 +45,9 @@ class Orders extends Component {
         const orderRows = this.props.orderRows;
 
         orderRows && orderRows.map((order) => { //add a table link for each user in order table
-            let userId = +order.user;
+            let userId = +order.userId;
 
-            order.user = <Link onClick={() => this.handleUserClick(userId)}>{userId}</Link>
+            order.userId = <Link onClick={() => this.handleUserClick(userId)}>{userId}</Link>
             return order;
         });
     

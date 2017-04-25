@@ -24,19 +24,7 @@ import {fetchProducts, setSelectedProductId} from './reducers/product'
 import {fetchOrders} from './reducers/order'
 import {fetchUsers} from './reducers/user'
 
-// const ExampleApp = connect(
-//  ({ auth }) => ({ user: auth })
-// )(
-//  ({ user, children }) =>
-//    <div>
-//      <nav>
-//        {user ? <WhoAmI/> : <Login/>}
-//      </nav>
-//      {children}
-//    </div>
-// )
-
-const handleFetchOrders = () => {
+const onAdminEnter = () => {
   store.dispatch(fetchOrders());
   store.dispatch(fetchUsers());
 }
@@ -46,10 +34,6 @@ const onProductEnter = nextRouterState => {
   store.dispatch(setSelectedProductId(productId))
 }
 
-// const handleFetchProducts = (nextRouterState, replace, done) => {
-//   store.dispatch(fetchProducts())
-//   .then(() => done())
-// }
 function establishCart() {
   if (!window.localStorage.cart || Object.keys(window.localStorage.cart).length < 1) {
     window.localStorage.cart=JSON.stringify({Products: []})
@@ -67,8 +51,8 @@ render(
        <Route path='/product/:id' component={ProductView} onEnter={onProductEnter}/>
        <Route path='/user/:id' component={UserAccountView} />
        <Route path='/cart' component={CartView} />
-       <Route path='/admin' component={AdminView} onEnter={handleFetchOrders} >
-        <Route path = '/admin/orders' component = {Orders} onEnter={handleFetchOrders}/>
+       <Route path='/admin' component={AdminView} onEnter={onAdminEnter} >
+        <Route path = '/admin/orders' component = {Orders} />
         </Route>
        <IndexRedirect to="/home" />
      </Route>
