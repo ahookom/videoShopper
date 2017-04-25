@@ -10,56 +10,60 @@ import DeleteButton from './DeleteButton'
 class Orders extends Component {
 
     constructor (props) {
-        console.log(props);
         super(props);
         this.state = {
-            topTable : {}
+            userTable : {}
         }
         this.handleUserClick = this.handleUserClick.bind(this);
     }
    
     handleUserClick(userId){
-        console.log("!!!", this.props.users)
-        let topTableRows = this.props.users.find((user) => {
-            console.log(user.id)
-            console.log("userId", userId)
-                    return user.id === userId;
+
+        let user = this.props.users.find((user) => {
+            return user.id === userId;
         })
+
+        let userTableRow = {
+            name: user.name,
+            email: user.email,
+            type: user.type,
+            shippingAddress: user.shippingAddress,
+            billingAddress: user.billingAddress
+        }
+
         this.setState({
-            topTable: {
-                rows: [topTableRows],
-                columns: Object.keys(topTableRows),
-                tableName: userId
+            userTable: {
+                rows: [userTableRow],
+                columns: Object.keys(userTableRow),
+                tableName: user.name
             }
         })
     }
 
     render (){
+        const orderColumns = this.props.orderColumns; 
+        const orderRows = this.props.orderRows;
 
+        orderRows && orderRows.map((order) => { //add a table link for each user in order table
+            let userId = +order.user;
 
-        const rows = this.props.rows;
-        rows && rows.map((order) => {
-            // console.log("order.user is ", order.user)
-            order.user = <Link onClick={() => this.handleUserClick(2)}>user2</Link>
+            order.user = <Link onClick={() => this.handleUserClick(userId)}>{userId}</Link>
             return order;
         });
-        const columns = this.props.columns;
-        const tableName = "Orders";
     
 
         return (
         <div className="col-md-9">   
-            {this.state.topTable.rows && 
-                <Table 
-                    rows = {this.state.topTable.rows} 
-                    columns = {this.state.topTable.columns} 
-                    tableName = {this.state.topTable.tableName} 
-                />
-            }
-            <Table 
-                rows = {rows}
-                columns = {columns}
-                tableName = {tableName}
+            {this.state.userTable.rows && 
+            <Table //users table (only appears when a user in the orders table is clicked on)
+                rows = {this.state.userTable.rows} 
+                columns = {this.state.userTable.columns} 
+                tableName = {this.state.userTable.tableName} 
+            />}
+            <Table //orders table
+                rows = {orderRows}
+                columns = {orderColumns}
+                tableName = {"Orders"}
             />
         </div>  
         );
@@ -68,37 +72,31 @@ class Orders extends Component {
 
 // ------------- Container
 const mapStateToProps = (state, ownProps) => {
-    // console.log("state ", state);
-    // console.log("state.orders.allOrders", console.log(state.orders.allOrders))
-    // console.log("Object.keys", state.orders.allOrders[0]);
     
     let users = state.users.allUsers;
-    //console.log("users", users);
-    // console.log("users[0]", users[0])
-    
+ 
     if (state.orders.allOrders.length > 0 && state.users.allUsers.length> 0) {
+        
+        //create order rows
         let rows = state.orders.allOrders.map(function(order){
-
             let deleteRow = <DeleteButton />
-            let user = users[1].name;
-            //let user = users[order[user_id]-1]
+            let userId = 2; //change once seed data for orders includes user info... order.user_id
 
-            let rObj = {modify: deleteRow,id: order.id, status: order.status, 
+            let orderRow = {modify: deleteRow,id: order.id, status: order.status, 
                 delivery: order.deliveryDay, created_at: order.created_at, 
-                updated_at: order.updated_at, user:users[1].id, products:'link'}
+                updated_at: order.updated_at, userId: userId, products:'link'}
 
-            return rObj;
+            return orderRow;
         });
         
         return ({
-            rows: rows,
-            columns: Object.keys(rows[0]),
-            users: state.users.allUsers
+            orderRows: rows,
+            orderColumns: Object.keys(rows[0]),
+            users: users
         })
     }
 
-    return {};
-
+    return {}; //return an empty object until orders arrive on state
 }
 const mapDispatchToProps = null;
 
