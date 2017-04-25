@@ -7,11 +7,30 @@ import Stars from './Stars'
 
 // ------------- Component
 const ProductView = (props) => {
-    const product = findObjectById(props.allProducts, props.productId) || {}
-    console.log('****************', product)
+  const product = findObjectById(props.allProducts, props.productId) || {}
+
+  function clickHandler(){
+    let cart = JSON.parse(window.localStorage.cart)
+    let addedToCart = false
+    for (var i=0; i<cart.Products.length; i++) {
+        if (cart.Products[i].product === product.id) {
+          cart.Products[i].quantity++
+          addedToCart = true
+        }
+    }
+
+    if (addedToCart === false) {
+      cart.Products.push({
+        product: product.id,
+        quantity: 1
+      })
+    }
+//    console.log(cart.Products)
+    window.localStorage.cart = JSON.stringify(cart)
+  }
+
       return (
         <div>
-            <link href="/css/shop-item.css" rel="stylesheet" />
             <div className="container">
 
                 <div className="row">
@@ -35,19 +54,17 @@ const ProductView = (props) => {
                                 </h4>
                                 <p>{product.description}</p>
                             </div>
+                            <div>
+                                    <a className="btn btn-primary btn-large" onClick={clickHandler}>Add To Cart</a>
+                            </div>
+                            <hr />
+
                             <div className="ratings">
-                                <p className="pull-right">3 reviews</p>
-                                {/*<p>
-                                    <span className="glyphicon glyphicon-star"></span>
-                                    <span className="glyphicon glyphicon-star"></span>
-                                    <span className="glyphicon glyphicon-star"></span>
-                                    <span className="glyphicon glyphicon-star"></span>
-                                    <span className="glyphicon glyphicon-star-empty"></span>
-                                    4.0 stars
-                                </p>*/}
-                                <p>
-                                    <Stars rating={product.rating} /> {product.rating} stars
-                                </p>
+
+                                <div className="pull-right">{product.reviews && product.reviews.length} reviews
+                                </div>
+                                <Stars rating={product.rating} /> {product.rating} stars
+
                             </div>
                         </div>
 
