@@ -51,13 +51,17 @@ const ProductView = (props) => {
                             <p>{product.description}</p>
                         </div>
                         <div>
-                            <Link className="btn btn-primary btn-large" onClick={clickHandler}>Add To Cart</Link>
+                            <Link  to="/cart" className="btn btn-primary btn-large" onClick={clickHandler}>Add To Cart</Link>
                         </div>
-                        <hr />
                         <div className="ratings">
-                            <div className="pull-right">{product.reviews && product.reviews.length} reviews
+                            {product.reviews && product.reviews.length > 0 &&
+                            <div>
+                                <hr />
+                                <div className="pull-right">{product.reviews && product.reviews.length} reviews</div>
+                                <Stars rating={product.rating} /> {product.rating} stars
+
                             </div>
-                            <Stars rating={product.rating} /> {product.rating} stars
+                            }
                         </div>
                     </div>
                 </div>
@@ -66,7 +70,7 @@ const ProductView = (props) => {
                         <a className="btn btn-success">Leave a Review</a>
                     </div>
                     {
-                        product.reviews && product.reviews.map(x => {
+                        product.reviews && product.reviews.length > 0 ? product.reviews.map(x => {
                             return (
                                 <div key={x.id}>
                                     <Stars rating={x.stars} />
@@ -76,7 +80,7 @@ const ProductView = (props) => {
                                     <hr />
                                 </div>
                             )
-                        })
+                        }) : <h4> Be the first to leave a review! </h4>
                     }
                 </div>
             </div>
