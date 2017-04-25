@@ -20,7 +20,7 @@ import ProductView from './components/ProductView'
 import UserAccountView from './components/UserAccountView'
 import Orders from './components/Orders'
 
-import {fetchProducts, getProductById} from './reducers/product'
+import {fetchProducts, setSelectedProductId} from './reducers/product'
 import {fetchOrders} from './reducers/order'
 import {fetchUsers} from './reducers/user'
 
@@ -43,18 +43,23 @@ const handleFetchOrders = () => {
 
 const onProductEnter = nextRouterState => {
   const productId = nextRouterState.params.id
-  store.dispatch(getProductById(productId))
+  store.dispatch(setSelectedProductId(productId))
 }
 
 // const handleFetchProducts = (nextRouterState, replace, done) => {
 //   store.dispatch(fetchProducts())
 //   .then(() => done())
 // }
+function establishCart() {
+  if (!window.localStorage.cart || Object.keys(window.localStorage.cart).length < 1) {
+    window.localStorage.cart=JSON.stringify({Products: []})
+  }
+}
 
 render(
  <Provider store={store}>
    <Router history={browserHistory}>
-     <Route path="/" component={App} >
+     <Route path="/" component={App} onEnter={establishCart}>
        <Route path='/home' component={HomeView} />
        <Route path='/products' component={ProductsView} >
          <Route path='/products/:category' component={ProductsView} />

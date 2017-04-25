@@ -2,6 +2,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import OrderForm from './OrderForm'
+import Table from './Table'
+
+
 
 // ------------- Component
 class CartView extends React.Component {
@@ -12,17 +15,33 @@ class CartView extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
+  fetchProductNames(Products) {
+    return Products.forEach(purchase => purchase.product = this.findProductNameById(+purchase.product))
+  }
+
+  findProductNameById(id) {
+    let productArr = this.props.products.filter(product => product.id===id)
+    return productArr[0].name
+  }
+
   handleClick(event) {
     event.preventDefault()
     this.setState(prevState => ({displayOrderForm: !prevState.displayOrderForm}))
   }
 
   render() {
+    let { Products } = JSON.parse(window.localStorage.cart)
+    if (this.props.products.length) {
+      this.fetchProductNames(Products)
+    }
+    let tableName = 'Orders'
+    let orderColumns = Products.length ? Object.keys(Products[0]) : []
+    let orderRows = Products
     return (
           <header className="jumbotron hero-spacer">
-           <h1>CartView</h1>
-           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-           <p><a className="btn btn-primary btn-large" onClick={this.handleClick}>Dispaly Order Form </a>
+           <h3>My Cart</h3>
+           <Table tableName={tableName} columns={orderColumns} rows={orderRows} />
+           <p><a className="btn btn-primary btn-large" onClick={this.handleClick}>Place your order! </a>
            </p>
            {this.state.displayOrderForm &&
              <OrderForm />
@@ -33,7 +52,11 @@ class CartView extends React.Component {
 }
 
 // ------------- Container
-const mapStateToProps = null
+const mapStateToProps =(state) => {
+  return {
+    products: state.products.allProducts
+  }
+}
 
 const mapDispatchToProps = null
 

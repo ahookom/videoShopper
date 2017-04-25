@@ -12,16 +12,16 @@ export const receiveProducts = (products) => ({
   products
 })
 
-export const selectedProduct = (selectedProduct) => ({
+export const setSelectedProductId = (selectedProductId) => ({
   type: SELECT_PRODUCT,
-  selectedProduct
+  selectedProductId
 })
 
 
 // ----------- Reducer
 const initialState = {
   allProducts: [],
-  selectedProduct: {}
+  selectedProductId: 0
 }
 
 export default function productReducer(state = initialState, action) {
@@ -33,7 +33,7 @@ export default function productReducer(state = initialState, action) {
     break
 
   case SELECT_PRODUCT:
-    nextState.selectedProduct = action.selectedProduct
+    nextState.selectedProductId = action.selectedProductId
     break
 
   default:
@@ -68,14 +68,4 @@ export const removeProduct = (productId) => (dispatch) => {
         dispatch(fetchProducts())
       })
       .catch(console.error)
-}
-
-export const getProductById = productId => {
-  return dispatch => {
-    axios.get(`/api/products/${productId}`)
-      .then(response => {
-        dispatch(selectedProduct(response.data))
-      })
-      .catch(console.err)
-  }
 }

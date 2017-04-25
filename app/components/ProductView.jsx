@@ -1,10 +1,15 @@
 // Required libraries
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { findObjectById } from '../reducers/utility'
+import Stars from './Stars'
+
 
 // ------------- Component
 const ProductView = (props) => {
-  return (
+    const product = findObjectById(props.allProducts, props.productId) || {}
+    console.log('****************', product)
+      return (
         <div>
             <link href="/css/shop-item.css" rel="stylesheet" />
             <div className="container">
@@ -23,22 +28,25 @@ const ProductView = (props) => {
                     <div className="col-md-9">
 
                         <div className="thumbnail">
-                            <img className="img-responsive" src="http://placehold.it/800x300" alt="" />
+                            <img className="img-responsive" src={product.imageURL} alt="" />
                             <div className="caption-full">
-                                <h4 className="pull-right">{props.product.price}</h4>
-                                <h4><a href="#">{props.product.name}</a>
+                                <h4 className="pull-right">${product.price}</h4>
+                                <h4><a href="#">{product.name}</a>
                                 </h4>
-                                <p>{props.product.description}</p>
+                                <p>{product.description}</p>
                             </div>
                             <div className="ratings">
                                 <p className="pull-right">3 reviews</p>
-                                <p>
+                                {/*<p>
                                     <span className="glyphicon glyphicon-star"></span>
                                     <span className="glyphicon glyphicon-star"></span>
                                     <span className="glyphicon glyphicon-star"></span>
                                     <span className="glyphicon glyphicon-star"></span>
                                     <span className="glyphicon glyphicon-star-empty"></span>
                                     4.0 stars
+                                </p>*/}
+                                <p>
+                                    <Stars rating={product.rating} /> {product.rating} stars
                                 </p>
                             </div>
                         </div>
@@ -103,13 +111,16 @@ const ProductView = (props) => {
             </div>
 
         </div>
-    )
+      )
 }
+
+
 
 // ------------- Container
 const mapStateToProps = (state, ownProps) => (
   {
-    product: state.products.selectedProduct
+    productId: state.products.selectedProductId,
+    allProducts: state.products.allProducts
   }
 )
 
