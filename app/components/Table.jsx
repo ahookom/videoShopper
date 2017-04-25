@@ -23,9 +23,9 @@ const Table = (props) => {
                 </thead>
                 <tbody>
                     {
-                        rows && rows.map((row,index) => <tr key = {index}> {
+                        rows && rows.map((row,index) => <tr key = {index}>{
                             Object.keys(row).map((columnName,index) => <td key={index}>{row[columnName]}</td>)
-                            } </tr>)
+                            }</tr>)
                     }
                   
                 </tbody>

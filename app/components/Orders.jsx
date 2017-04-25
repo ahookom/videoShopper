@@ -1,86 +1,105 @@
 // // Required libraries
-// import React from 'react'
-// import { connect } from 'react-redux'
-// import Table from './Table'
-// import {Link} from'react-router'
-// import DeleteButton from './DeleteButton'
+import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import Table from './Table'
+import {Link} from'react-router'
+import DeleteButton from './DeleteButton'
 
 
 // // ------------- Component
-// const AdminView = (props) => {
-//         const rows = props.rows;
-//         const columns = props.columns;
-//         const tableName = "Orders";
-//         console.log("rows ",rows);
-//         console.log("columns ", columns);
+class Orders extends Component {
 
-//  return (
-//         <div>
+    constructor (props) {
+        super(props);
+        this.state = {
+            userTable : {}
+        }
+        this.handleUserClick = this.handleUserClick.bind(this);
+    }
+   
+    handleUserClick(userId){
 
-//             <div className="container">
+        let user = this.props.users.find((user) => {
+            return user.id === userId;
+        })
 
-//                 <div className="row">
+        let userTableRow = {
+            name: user.name,
+            email: user.email,
+            type: user.type,
+            shippingAddress: user.shippingAddress,
+            billingAddress: user.billingAddress
+        }
 
-//                     <div className="col-md-3">
-//                         <p className="lead">Admin Panel</p>
-//                         <div className="list-group">
-//                             <a href="#" className="list-group-item">Orders</a>
-//                             <a href="#" className="list-group-item">Products</a>
-//                             <a href="#" className="list-group-item">Users</a>
-//                         </div>
-//                     </div>
+        this.setState({
+            userTable: {
+                rows: [userTableRow],
+                columns: Object.keys(userTableRow),
+                tableName: user.name
+            }
+        })
+    }
 
-//                     <div className="col-md-9">     
-//                         <Table 
-//                             rows = {rows}
-//                             columns = {columns}
-//                             tableName = {tableName}
-//                         />
+    render (){
+        const orderColumns = this.props.orderColumns; 
+        const orderRows = this.props.orderRows;
 
-//                     </div>
-//                 </div>
-//             </div>
-//     </div>
-//     );
-// };
+        orderRows && orderRows.map((order) => { //add a table link for each user in order table
+            let userId = +order.userId;
 
-// // ------------- Container
-// const mapStateToProps = (state, ownProps) => {
-//     console.log("state ", state);
-//     console.log("state.orders.allOrders", console.log(state.orders.allOrders))
-//     console.log("Object.keys", state.orders.allOrders[0]);
-
-//     //let columns = ["id", "status", "delivery", "created at", "updated at", "user", "products"]
+            order.userId = <Link onClick={() => this.handleUserClick(userId)}>{userId}</Link>
+            return order;
+        });
     
-//     let users = state.users.allUsers;
-//     console.log("users", users);
-//     console.log("users[0]", users[0])
+
+        return (
+        <div className="col-md-9">   
+            {this.state.userTable.rows && 
+            <Table //users table (only appears when a user in the orders table is clicked on)
+                rows = {this.state.userTable.rows} 
+                columns = {this.state.userTable.columns} 
+                tableName = {this.state.userTable.tableName} 
+            />}
+            <Table //orders table
+                rows = {orderRows}
+                columns = {orderColumns}
+                tableName = {"Orders"}
+            />
+        </div>  
+        );
+    }
+};
+
+// ------------- Container
+const mapStateToProps = (state, ownProps) => {
     
-//     if (state.orders.allOrders.length > 0 && state.users.allUsers.length> 0) {
-//         let rows = state.orders.allOrders.map(function(order){
-
-//             let deleteRow = <DeleteButton />
-//             let user = users[1].name;
-//             //let user = users[order[user_id]-1]
-
-//             let rObj = {modify: deleteRow,id: order.id, status: order.status, 
-//                 delivery: order.deliveryDay, created_at: order.created_at, 
-//                 updated_at: order.updated_at, user:<Link to="">{user}</Link>, products:'link'}
-
-//             return rObj;
-//         });
+    let users = state.users.allUsers;
+ 
+    if (state.orders.allOrders.length > 0 && state.users.allUsers.length> 0) {
         
-//         return ({
-//             rows: rows,
-//             columns: Object.keys(rows[0])
-//         })
-//     }
+        //create order rows
+        let rows = state.orders.allOrders.map(function(order){
+            let deleteRow = <DeleteButton />
+            let userId = 2; //change once seed data for orders includes user info... order.user_id
 
-//     return {};
+            let orderRow = {modify: deleteRow,id: order.id, status: order.status, 
+                delivery: order.deliveryDay, created_at: order.created_at, 
+                updated_at: order.updated_at, userId: userId, products:'link'}
 
-// }
-// const mapDispatchToProps = null;
+            return orderRow;
+        });
+        
+        return ({
+            orderRows: rows,
+            orderColumns: Object.keys(rows[0]),
+            users: users
+        })
+    }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(AdminView);
+    return {}; //return an empty object until orders arrive on state
+}
+const mapDispatchToProps = null;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);
 
 

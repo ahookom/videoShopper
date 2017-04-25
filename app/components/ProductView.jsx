@@ -33,6 +33,7 @@ const ProductView = (props) => {
       })
     }
     window.localStorage.cart = JSON.stringify(cart)
+    window.dispatchEvent(new Event('storage'))
   }
       return (
         <div>

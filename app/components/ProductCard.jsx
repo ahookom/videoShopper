@@ -2,9 +2,10 @@ import React from 'react'
 import { Link } from 'react-router'
 import Stars from './Stars'
 
+
 export default (props) => {
   return (
-  <div className="col-sm-4 col-lg-4 col-md-4">
+  <div className="col-sm-4 col-lg-4 col-md-4" style={{zIndex: 100 - props.product.id}}>
       <div className="thumbnail">
           <img src={props.product.imageURL} alt="" />
           <div className="caption">

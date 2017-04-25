@@ -4,22 +4,13 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import LoginBoxes from './LoginBoxes'
 
-function countProducts(productsArr) {
+function countCartProducts(productsArr) {
   return productsArr.reduce((accum, purchase) => accum+=purchase.quantity, 0)
 }
 
 // ------------- Component
 const NavBar = (props) => {
-  let cart = JSON.parse(window.localStorage.cart)
-
-  // seed a dummy purchase for testing purposes
-  if (!cart.Products.length) {
-    window.localStorage['cart'] = JSON.stringify({
-      Products: [ { product: 1, quantity: 2 } ]
-    })
-  }
-
-  const cartAmountDisplay = cart.Products.length ? '('+countProducts(JSON.parse(window.localStorage.cart).Products)+')' : ''
+  const cartAmountDisplay = props.cart.Products && props.cart.Products.length ? ` (${countCartProducts(props.cart.Products)})` : ''
 
   return (
 <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -41,7 +32,7 @@ const NavBar = (props) => {
                         <Link to='/products'>Products</Link>
                     </li>
                     <li>
-                        <Link to='/cart'>{`Cart ${cartAmountDisplay}`}</Link>
+                        <Link to='/cart'>Cart{cartAmountDisplay}</Link>
                     </li>
                     <li>
                         <LoginBoxes />
@@ -55,6 +46,8 @@ const NavBar = (props) => {
     </nav>
   )
 }
+
+
 
 // ------------- Container
 const mapStateToProps = null
