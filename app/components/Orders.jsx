@@ -12,9 +12,11 @@ class Orders extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            userTable : {}
+            userTable : {},
+            productTable: {}
         }
         this.handleUserClick = this.handleUserClick.bind(this);
+        this.handleProductClick = this.handleProductClick.bind(this);
     }
    
     handleUserClick(userId){
@@ -40,14 +42,34 @@ class Orders extends Component {
         })
     }
 
+      handleProductClick(orderId){
+
+        let allPurchases = this.props.purchases.purchases;
+        console.log("allPurchases,", allPurchases)
+
+        let orderPurchases= allPurchases.filter(function(purchase){
+            return purchase.order_id === orderId;
+        })
+        console.log(orderPurchases)
+
+        this.setState({
+            productTable: {
+                rows: orderPurchases,
+                columns: Object.keys(orderPurchases[0]),
+                tableName: "Products Purchased"
+            }
+        })
+    }
+
     render (){
         const orderColumns = this.props.orderColumns; 
         const orderRows = this.props.orderRows;
 
         orderRows && orderRows.map((order) => { //add a table link for each user in order table
             let userId = +order.userId;
-
+            let orderId = +order.id;
             order.userId = <Link onClick={() => this.handleUserClick(userId)}>{userId}</Link>
+            order.products = <Link onClick={() => this.handleProductClick(orderId)}>Products</Link>
             return order;
         });
     
@@ -59,6 +81,12 @@ class Orders extends Component {
                 rows = {this.state.userTable.rows} 
                 columns = {this.state.userTable.columns} 
                 tableName = {this.state.userTable.tableName} 
+            />}
+            {this.state.productTable.rows && 
+            <Table //products table (only appears when a product in the orders table is clicked on)
+                rows = {this.state.productTable.rows} 
+                columns = {this.state.productTable.columns} 
+                tableName = {this.state.productTable.tableName} 
             />}
             <Table //orders table
                 rows = {orderRows}
@@ -72,8 +100,9 @@ class Orders extends Component {
 
 // ------------- Container
 const mapStateToProps = (state, ownProps) => {
-    
+    console.log("state is ",state)
     let users = state.users.allUsers;
+    let purchases = state.purchase;
  
     if (state.orders.allOrders.length > 0 && state.users.allUsers.length> 0) {
         
@@ -84,7 +113,7 @@ const mapStateToProps = (state, ownProps) => {
 
             let orderRow = {modify: deleteRow,id: order.id, status: order.status, 
                 delivery: order.deliveryDay, created_at: order.created_at, 
-                updated_at: order.updated_at, userId: userId, products:'link'}
+                updated_at: order.updated_at, userId: userId, products:'products'}
 
             return orderRow;
         });
@@ -92,7 +121,8 @@ const mapStateToProps = (state, ownProps) => {
         return ({
             orderRows: rows,
             orderColumns: Object.keys(rows[0]),
-            users: users
+            users: users,
+            purchases: purchases
         })
     }
 
