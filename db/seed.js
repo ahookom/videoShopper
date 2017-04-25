@@ -112,7 +112,10 @@ const orders = seed(Order, {
 
 const reviews = seed(Review, {
   simpleReview: {title: 'Best photos!!!', stars: 5, text: 'OMG like totes amazeballs', product_id: 2},
-  secondReview: {title: 'You call that a video?', stars: 1, text: 'My product was not visible and that guy did not sound like Morgan Freeman AT. ALL.', product_id: 1}
+  secondReview: {title: 'You call that a video?', stars: 1, text: 'My product was not visible and that guy did not sound like Morgan Freeman AT. ALL.', product_id: 1},
+  thirdReview: {title: 'Great service!', stars: 5, text: 'Delivered my product video in only four days!', product_id: 3},
+  fourthReview: {title: 'Wanted a different background', stars: 3, text: 'I really wanted a teal background, not turquoise. But besides that, great job!', product_id: 2},
+  fifthReview: {title: 'Wow. What a voice.', stars: 5, text: 'I was shocked at the quality of the voice over.', product_id: 1}
 })
 
 const categories = seed(Category, {
