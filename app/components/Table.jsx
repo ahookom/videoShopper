@@ -9,8 +9,6 @@ const Table = (props) => {
     const rows = props.rows;
     const tableName = props.tableName;
 
-    console.log("table props are ", props)
-
  return (
         <div className="row">
             
