@@ -86,7 +86,7 @@ const products = seed(Product, {
     tags: ['video', 'customizable', 'deal']
   },
   bundle1: {
-    name: 'Standard Package of Video and Photos',
+    name: 'Multimedia Package',
     description: 'Save when you buy photos and videos together! Let us make a custom video for your website, increasing traffic and sales! Send us your product and we will film it under professional lighting.',
     price: '199.75',
     leadTime: 14,
@@ -95,7 +95,7 @@ const products = seed(Product, {
     tags: ['deal', 'bundle']
   },
   bundle2: {
-    name: 'Premium Package of Custom Video and Photos',
+    name: 'Custom Multimedia Package',
     description: 'Save when you buy photos and videos together! Let us make a custom video for your website, increasing traffic and sales! Send us your product and we will film it under professional lighting.',
     price: '200.00',
     leadTime: 14,

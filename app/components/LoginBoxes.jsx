@@ -10,13 +10,13 @@ import WhoAmI from './WhoAmI'
 const LoginBoxes = ({ user, children }) => {
  return (
    <div>
-     <nav>
+    <ul className="nav navbar-nav">
        {user ? <WhoAmI/> : <Login/>}
-     </nav>
-     {children}
+    </ul>
+    {children}
    </div>
- );
-};
+ )
+}
 
 
 // ------------- Container
@@ -24,6 +24,6 @@ const mapStateToProps = ({ auth }) => ({ user: auth })
 
 //const mapDispatchToProps = null;
 
-export default connect(mapStateToProps)(LoginBoxes);
+export default connect(mapStateToProps)(LoginBoxes)
 
 

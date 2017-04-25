@@ -3,8 +3,7 @@ import axios from 'axios'
 
 // ----------- Actions
 const FETCH_ORDERS = 'FETCH_ORDERS'
-const ADD_TO_CART = 'ADD_TO_CART'
-const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
+
 // ----------- Action Creators
 export const receiveOrders = (orders) => ({
   type: FETCH_ORDERS,
@@ -13,8 +12,7 @@ export const receiveOrders = (orders) => ({
 
 // ----------- Reducer
 const initialState = {
-  allOrders: [{}],
-  cart: { Products: [] }
+  allOrders: [{}]
 }
 
 export default function orderReducer(state = initialState, action) {
@@ -24,31 +22,7 @@ export default function orderReducer(state = initialState, action) {
   case FETCH_ORDERS:
     nextState.allOrders = action.orders
     break
-  case ADD_TO_CART:
-    {
-      let cart = JSON.parse(window.localStorage.cart)
-      let added = false
-      cart.Products.forEach(purchase => {
-        if (purchase.product===action.product) {
-          added=true
-          purchase.quantity+=1
-        }
-      })
-      if (!added) {
-        cart.Products.push({product: action.product, quantity: 1})
-      }
-      window.localStorage.cart=JSON.stringify(cart)
-      break
-  }
-  case REMOVE_FROM_CART:
-    let cart = JSON.parse(window.localStorage.cart)
-    cart.Products.forEach(purchase => {
-      if (purchase.product===action.product) {
-        purchase.quantity-=1
-      }
-    })
-    window.localStorage.cart=JSON.stringify(cart)
-    break
+
   default:
     return state
   }
@@ -81,16 +55,3 @@ export const removeOrder = (orderId) => (dispatch) => {
       .catch(console.error)
 }
 
-export const addToCart = (productId) => {
-  return {
-    type: ADD_TO_CART,
-    product: productId
-  }
-}
-
-export const removeFromCart = (productId) => {
-  return {
-    type: REMOVE_FROM_CART,
-    product: productId
-  }
-}
