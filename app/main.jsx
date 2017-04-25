@@ -23,10 +23,12 @@ import Orders from './components/Orders'
 import {fetchProducts, setSelectedProductId} from './reducers/product'
 import {fetchOrders} from './reducers/order'
 import {fetchUsers} from './reducers/user'
+import {fetchPurchases} from './reducers/purchase'
 
 const onAdminEnter = () => {
   store.dispatch(fetchOrders());
   store.dispatch(fetchUsers());
+  store.dispatch(fetchPurchases());
 }
 
 const onProductEnter = nextRouterState => {
