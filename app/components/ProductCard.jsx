@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import Stars from './Stars'
 
+
 export default (props) => {
   return (
   <div className="col-sm-4 col-lg-4 col-md-4">

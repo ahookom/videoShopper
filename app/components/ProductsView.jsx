@@ -5,7 +5,7 @@ import ProductCard from './ProductCard'
 import Carousel from './Carousel'
 import CategoriesSideBar from './CategoriesSideBar'
 import { receiveProducts } from '../reducers/product'
-
+import FlipMove from 'react-flip-move'
 
 // ------------- Component
 class ProductsView extends Component {
@@ -63,9 +63,10 @@ class ProductsView extends Component {
           <div className="col-md-9">
 
             <div className="row">
-
-              {this.state.activeProducts.map((product, index) => <div key={index}><ProductCard product={product} /></div>)}
-
+              <FlipMove easing="cubic-bezier(1, 0, 0, 1)" duration={750} leaveAnimation='fade' appearAnimation='fade' enterAnimation='fade'>
+                {this.state.activeProducts.map((product, index) =>
+                  <div key={product.id*100}><ProductCard product={product} /></div>)}
+              </FlipMove>
             </div>
 
           </div>
