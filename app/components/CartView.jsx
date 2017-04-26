@@ -3,25 +3,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import OrderForm from './OrderForm'
 import Table from './Table'
-
-
+import EditPurchase from './EditPurchase'
+import {addProductNames, findObjectById} from '../reducers/utility'
 
 // ------------- Component
 class CartView extends React.Component {
   constructor(props) {
     super(props)
     this.state = { displayOrderForm: false }
-
+    this.state = { displayEditForm: false }
     this.handleClick = this.handleClick.bind(this)
-  }
-
-  fetchProductNames(Products) {
-    return Products.forEach(purchase => purchase.product = this.findProductNameById(+purchase.product))
-  }
-
-  findProductNameById(id) {
-    let productArr = this.props.products.filter(product => product.id===id)
-    return productArr[0].name
+    this.handleEditClick = this.handleEditClick.bind(this)
   }
 
   handleClick(event) {
@@ -29,34 +21,45 @@ class CartView extends React.Component {
     this.setState(prevState => ({displayOrderForm: !prevState.displayOrderForm}))
   }
 
+  handleEditClick(event) {
+    event.preventDefault()
+    this.setState(prevState => ({displayEditForm: !prevState.displayEditForm}))
+    console.log('~~edit click in cart', this.state.displayEditForm)
+  }
+
   render() {
-    let { Products } = JSON.parse(window.localStorage.cart)
-    if (this.props.products.length) {
-      this.fetchProductNames(Products)
-    }
-    let tableName = 'Orders'
-    let orderColumns = Products.length ? Object.keys(Products[0]) : []
-    let orderRows = Products
+    let extendedProducts
+    const { Products } = JSON.parse(window.localStorage.cart)
+    this.props.products.length ? extendedProducts = addProductNames(Products, this.props.products) : extendedProducts = []
+    const tableName = 'Orders'
+    const orderColumns = extendedProducts.length ? Object.keys(extendedProducts[0]) : []
+    const orderRows = extendedProducts
     return (
           <header className="jumbotron hero-spacer">
-           <h3>My Cart</h3>
-           <Table tableName={tableName} columns={orderColumns} rows={orderRows} />
-           <p><a className="btn btn-primary btn-large" onClick={this.handleClick}>Place your order! </a>
-           </p>
+            {this.state.displayEditForm ? (
+              <EditPurchase order={extendedProducts}/>
+            ) : (
+             <Table tableName={tableName} columns={orderColumns} rows={orderRows} />
+            )
+            }
+             <p> <a className="btn btn-primary btn-large" onClick={this.handleClick}>Add Order Info! </a>
+              <a className="btn btn-primary btn-large pull-right" onClick={this.handleEditClick}>Edit Cart </a>
+             </p>
+          <p>
            {this.state.displayOrderForm &&
-             <OrderForm />
+             <OrderForm products={extendedProducts}/>
            }
+           </p>
        </header>
     )
   }
 }
 
+
 // ------------- Container
-const mapStateToProps =(state) => {
-  return {
-    products: state.products.allProducts
-  }
-}
+const mapStateToProps =(state) => ({
+  products: state.products.allProducts
+})
 
 const mapDispatchToProps = null
 
