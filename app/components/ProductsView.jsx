@@ -63,9 +63,9 @@ class ProductsView extends Component {
           <div className="col-md-9">
 
             <div className="row">
-              <FlipMove easing="cubic-bezier(1, 0, 0, 1)" duration={750} leaveAnimation='accordionHorizontal' staggerDurationBy='30' enterAnimation='accordionHorizontal'>
+              <FlipMove duration={500} easing='cubic-bezier(0.25, 0.1, 0.25, 1)' leaveAnimation='fade' staggerDurationBy='30' enterAnimation='accordionHorizontal'>
                 {this.state.activeProducts.map((product, index) =>
-                  <div view='grid' key={product.id*100} index={index}><ProductCard product={product} /></div>)}
+                  <ProductCard key={product.id} index={index} product={product} />)}
               </FlipMove>
             </div>
 

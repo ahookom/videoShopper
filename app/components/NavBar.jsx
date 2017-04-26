@@ -31,6 +31,9 @@ const NavBar = (props) => {
                     <li>
                         <Link to='/products'>Products</Link>
                     </li>
+                </ul>
+              <div className="pull-right">
+                <ul className="nav navbar-nav">
                     <li>
                         <Link to='/cart'>Cart{cartAmountDisplay}</Link>
                     </li>
@@ -38,7 +41,7 @@ const NavBar = (props) => {
                         <LoginBoxes />
                     </li>
                 </ul>
-
+              </div>
             </div>
 
         </div>
