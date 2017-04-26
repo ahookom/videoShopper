@@ -59,9 +59,9 @@ export class OrderForm extends React.Component {
       billingAddress: this.state.billingAddress,
       phoneNumber: this.state.phoneNumber,
       name: this.state.name,
-      email: this.state.email
+      email: this.state.email,
+      purchaseArray: this.props.products
     }
-    // console.log('~~in order form ', event.target.shippingAddress.value)
     this.props.addOrder(orderData)
   }
 
@@ -88,7 +88,7 @@ export class OrderForm extends React.Component {
           PhoneNumber:
           <input type="text" value={this.state.phoneNumber} onChange={this.handleChangePhone} />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Place Order" />
       </form>
     )
   }
