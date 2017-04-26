@@ -91,7 +91,7 @@ const products = seed(Product, {
     price: '199.75',
     leadTime: 14,
     imageURL: 'https://static1.squarespace.com/static/586feeb08419c2130fdda9fb/587d6188c534a59c410c049e/587d6189be65944eb793fa80/1484611979834/Electronics_Photography_3.jpg?format=750w',
-    isActive: true,
+    isActive: false,
     tags: ['deal', 'bundle']
   },
   bundle2: {
@@ -121,7 +121,7 @@ const reviews = seed(Review, {
 const categories = seed(Category, {
   videoCategory: {
     title: 'Videos',
-    description: 'custom product videos with or without modelling and voiceover talent',
+    description: 'modelling and voiceover available',
     imageURL: 'http://noirexcellence.com/wp-content/uploads/2016/11/maxresdefault-1-800x500.jpg',
     frontEndRoute: 'products/video'
   },
