@@ -1,21 +1,25 @@
 
 ## VideoShopper requires node >= 6.7.0 and <8.0.0
 
-##To get the codebase:
+## VideoShopper
+
+VideoShopper is a complete single-page e-commerce site that uses a single Express server in Node to serve up both the frontend resources and the database data. It includes Sequelize database models that are currently set up to work with a Postgres SQL server running on the default port of localhost:5432. It uses React and Redux (and React-Redux) on the front-end, all the JavaScript for which is bundled using Webpack.
+
+The VideoShopper site includes the following views:
+
+* A home view with a welcome banner and product category cards
+* A products view displaying animated products cards that can be sorted by category.
+* A product view that offers details and reviews for a specific product.
+* An admin panel that displays order information (located at '/admin' , log in as 'god@example.com' with the password '1234' to take a look)
+* A cart view that provides the user with a form to place an order
+* A cart implemented in window.localStorage that works regardless of sign-in/registration and persists after the window has closed.
+
+## To get the codebase:
 
 * `git clone https://github.com/ahookom/videoShopper.git`
 
-or
 
-* `git init` in an empty directory on your machine.
-```sh
-git remote add videoshopper https://github.com/ahookom/videoShopper
-git fetch videoshopper
-git merge videoshopper/master
-```
-
-
-##To start it up:
+## To start it up:
 
 Short and sweet:
 
@@ -51,7 +55,7 @@ assuming you have postgres already installed and running.
 
 `/bin` has a few scripts, including a heroku deployment script.
 
-`/public` is where you'll find all the frontend code.
+`/public` is where you'll find various front-end resources
 
 ## Quick Heroku deployment
 
