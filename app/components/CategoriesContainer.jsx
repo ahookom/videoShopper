@@ -8,7 +8,7 @@ const CategoriesContainer = (props) => {
   let categories = []
   if (props.categories) categories=props.categories
   return (
-    <div>
+    <div className='container'>
        <div className="row">
             <div className="col-lg-12">
                 <h3>Available Products</h3>

@@ -7,7 +7,7 @@ export default (props) => {
   const imageURL = props.imageURL || 'http://geekmom.com/wp-content/uploads/2015/12/Guardians-of-the-Galaxy.jpg'
   const frontEndRoute = props.frontEndRoute || 'products'
   return (
-    <div className="col-md-3 col-sm-6 hero-feature">
+    <div className="col-md-4 col-sm-6 hero-feature">
       <div className="thumbnail">
           <img src={imageURL} alt="" />
           <div className="caption">

@@ -2,7 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import CategoriesContainer from './categoriesContainer'
-
+import { Link } from 'react-router'
 // ------------- Component
 const HomeView = (props) => (
 <div>
@@ -10,7 +10,7 @@ const HomeView = (props) => (
         <header className="jumbotron hero-spacer">
            <h1>Welcome to Video Shopper!</h1>
            <p>The streamlined way to order product videos for your entire catalog!</p>
-           <p><a className="btn btn-primary btn-large">Call to action!</a>
+           <p><Link to="/products" className="btn btn-primary btn-large">Check out our products!</Link>
            </p>
        </header>
    </div>
