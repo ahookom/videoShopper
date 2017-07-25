@@ -1,48 +1,25 @@
-# Hi, I'm bones
 
-I'm a happy little skeleton. You can clone me to use as a starter on your projects!
-I have React, Redux, Sequelize, and Express all just rattling around in here ready
-to go.
+## VideoShopper requires node >= 6.7.0 and <8.0.0
 
-## I need node >= 6.7.0
+## VideoShopper
 
-If you don't have it, I'll complain and tell you how to install it.
+VideoShopper is a complete single-page e-commerce site that uses a single Express server in Node to serve up both the frontend resources and the database data. It includes Sequelize database models that are currently set up to work with a Postgres SQL server running on the default port of localhost:5432. It uses React and Redux (and React-Redux) on the front-end, all the JavaScript for which is bundled using Webpack.
 
-## 1. Make me into something!
+The VideoShopper site includes the following views:
 
-We recommend that you **clone**, not fork, this repo – unless your intention is
-to develop Bones proper instead of using Bones as the starting point for your
-own application.
+* A home view with a welcome banner and product category cards
+* A products view displaying animated products cards that can be sorted by category.
+* A product view that offers details and reviews for a specific product.
+* An admin panel that displays order information (located at '/admin' , log in as 'god@example.com' with the password '1234' to take a look)
+* A cart view that provides the user with a form to place an order
+* A cart implemented in window.localStorage that works regardless of sign-in/registration and persists after the window has closed.
 
-Start by doing either of the following:
+## To get the codebase:
 
-* Create a GitHub repo and clone it, or
-* `git init` in an empty directory on your machine.
+* `git clone https://github.com/ahookom/videoShopper.git`
 
-After you have a repo on your machine:
 
-```sh
-git remote add bones https://github.com/FullstackAcademy/bones.git
-git fetch bones
-git merge bones/master
-```
-
-And then you'll have me! If I change – which I probably will – you can get the most recent
-version by doing this again:
-
-```sh
-git fetch bones
-git merge bones/master
-```
-
-## 2. I need a name.
-
-I don't have a name. I think I used to have one, but it turned to dust right along with my
-heart and liver and pituitary gland and all that stuff.
-
-Anyway, I'll need one. Give me a name in `package.json`.
-
-## 3. Start my dusty heart
+## To start it up:
 
 Short and sweet:
 
@@ -63,27 +40,22 @@ npm run start-dev
 npm run build-dev
 ```
 
-In two separate terminals. The vanilla `npm start` is for production — you won't use it in development!
+In two separate terminals.
 
-## My anatomy
+You can also use the vanilla `npm start`, but it is meant for production.
+
+## What's in the box
 
 `/app` has the React/Redux setup. `main.jsx` is the entry point.
 
-`/db` has the Sequelize models and database setup. It'll create the database for you if it doesn't exist,
-assuming you're using postgres.
+`/db` has Sequelize models and database setup. It'll create the database for you if it doesn't exist,
+assuming you have postgres already installed and running.
 
 `/server` has the Express server and routes. `start.js` is the entry point.
 
-`/bin` has scripts. (Right now it has *one* script that creates a useful symlink.)
+`/bin` has a few scripts, including a heroku deployment script.
 
-## Conventions
-
-I use `require` and `module.exports` in `.js` files.
-
-I use `import` and `export` in `.jsx` files, unless `require` makes for cleaner code.
-
-I use two spaces, no semi-colons, and trailing commas where possible. I'll
-have a linter someday soon.
+`/public` is where you'll find various front-end resources
 
 ## Quick Heroku deployment
 
