@@ -1,6 +1,4 @@
 
-## VideoShopper requires node >= 6.7.0 and <8.0.0
-
 ## VideoShopper
 
 VideoShopper is a complete single-page e-commerce site that uses a single Express server in Node to serve up both the frontend resources and the database data. It includes Sequelize database models that are currently set up to work with a Postgres SQL server running on the default port of localhost:5432. It uses React and Redux (and React-Redux) on the front-end, all the JavaScript for which is bundled using Webpack.
@@ -18,6 +16,7 @@ The VideoShopper site includes the following views:
 
 * `git clone https://github.com/ahookom/videoShopper.git`
 
+## Note: VideoShopper currently requires node >= 6.7.0 and < 8.0.0
 
 ## To start it up:
 
