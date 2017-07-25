@@ -1,7 +1,7 @@
 {
   "name": "video-shopper",
   "version": "0.0.1",
-  "description": "A happy little skeleton.",
+  "description": "An e-commerce website",
   "main": "index.js",
   "engines": {
     "node": "7.6.0"
