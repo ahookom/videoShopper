@@ -67,6 +67,7 @@ export class OrderForm extends React.Component {
 
   render() {
     return (
+      <div>
       <form onSubmit={this.handleSubmit}>
         <label>
           Name:
@@ -90,6 +91,7 @@ export class OrderForm extends React.Component {
         </label>
         <input type="submit" value="Place Order" />
       </form>
+      </div>
     )
   }
 }

@@ -8,13 +8,9 @@ import WhoAmI from './WhoAmI'
 
 // ------------- Component
 const LoginBoxes = ({ user, children }) => {
- return (
-   <div>
-    <ul className="nav navbar-nav">
+ return (<li className='loginboxes'>
        {user ? <WhoAmI/> : <Login/>}
-    </ul>
-    {children}
-   </div>
+       </li>
  )
 }
 

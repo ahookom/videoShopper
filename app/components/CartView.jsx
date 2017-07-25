@@ -35,6 +35,7 @@ class CartView extends React.Component {
     const orderColumns = extendedProducts.length ? Object.keys(extendedProducts[0]) : []
     const orderRows = extendedProducts
     return (
+      <div className='container'>
           <header className="jumbotron hero-spacer">
             {this.state.displayEditForm ? (
               <EditPurchase order={extendedProducts}/>
@@ -42,15 +43,14 @@ class CartView extends React.Component {
              <Table tableName={tableName} columns={orderColumns} rows={orderRows} />
             )
             }
-             <p> <a className="btn btn-primary btn-large" onClick={this.handleClick}>Add Order Info! </a>
+             <p> <a className="btn btn-primary btn-large" onClick={this.handleClick}>Start your order </a>
               <a className="btn btn-primary btn-large pull-right" onClick={this.handleEditClick}>Edit Cart </a>
              </p>
-          <p>
            {this.state.displayOrderForm &&
              <OrderForm products={extendedProducts}/>
            }
-           </p>
        </header>
+      </div>
     )
   }
 }

@@ -37,9 +37,7 @@ const NavBar = (props) => {
                     <li>
                         <Link to='/cart'>Cart{cartAmountDisplay}</Link>
                     </li>
-                    <li>
-                        <LoginBoxes />
-                    </li>
+                    <LoginBoxes />
                 </ul>
               </div>
             </div>
